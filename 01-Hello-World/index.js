@@ -2,19 +2,10 @@
 
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3003
 
 
-// users.push[
-// 'Muhammad Subhan',
-//   // Id: (),
-//  ]
-// console.log("Users ==> " , users);
 
-// app.post('/' , (req , res)=> {
-//   res.send('/users')
-// }
-// )
 
 
 
@@ -43,15 +34,14 @@ app.post("/user", (req, res) => {
     });
     return;
   }
-app.get("/", (req, res) => {
-  res.send("hello world!");
-});
-
-  users.push({
-    title,
-    age,
-    id: Date.now(),
-  });
+// app.get("/", (req, res) => {
+//   res.send("hello world!");
+// });
+//   users.push({
+//     title,
+//     age,
+//     id: Date.now(),
+//   });
 
   res.status(201).json({
     message: "user is created",
