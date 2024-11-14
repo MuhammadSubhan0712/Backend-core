@@ -7,7 +7,11 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-app.use(express.json());
+
+// MiddleWare
+app.use(express.json((req , res , next) => {
+  next
+}));
 
 app.get("/", (req, res) => {
   res.send("Hello World With Subhan");
@@ -74,7 +78,7 @@ app.get("/users", (req, res) => {
 
 // To get single user
 app.post("/user/:id", (req, res) => {
-  const { id } = res.params;
+  const { id } = req.params;
   const index = users.findIndex((items) => items.id === +id);
 
   if (index === -1) {
