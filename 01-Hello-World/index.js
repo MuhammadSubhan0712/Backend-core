@@ -3,7 +3,6 @@ import dotenv from "dotenv"
 dotenv.config()
 
  
-
 import express from 'express'
 const app = express();
 const port = process.env.PORT;
@@ -44,6 +43,8 @@ app.post("/user", (req, res) => {
   });
 });
 
+
+// To get all users
 app.get("/users" , (req , res ) => {
   res.status(200).json({
     message:"All users ==>",
@@ -51,9 +52,15 @@ app.get("/users" , (req , res ) => {
   });
 });
 
-
+// To get Single user
 app.post ("/user/:id" , (req , res) => {
-  const {id} =  res.params
+  const {id} =  res.params;
+  const index = users.findIndex((items) => items.id === +id)
+
+  res.status(200).json({
+    message: "UserID ==>",
+    data: users[index],
+  })
 })
 
 
@@ -61,16 +68,6 @@ app.listen(port, () => {
   console.log(`Server is running on port==> ${port}`);
 });
 
-// // get all user
-// app.get("/users", (req, res) => {
-//   res.status(200).json({
-//     data: users,
-//   });
-// });
-
-// // get single user
-// app.get("/user/:id", (req, res) => {
-//   const { id } = req.params;
 
 //   const index = users.findIndex((item) => item.id === +id);
 
