@@ -18,46 +18,46 @@ const port = 3000
 
 
 
-app.get('/', (req, res) => {
-  res.send('Hello With the new!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello With the new!')
+// })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-console.log("Hello Me With the new World")
-
-
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
+// console.log("Hello Me With the new World")
 
 
 
 
-// const users = [];
 
-// app.get("/", (req, res) => {
-//   res.send("hello world!");
-// });
 
+
+const users = [];
 // // add new user
-// app.post("/user", (req, res) => {
-//   const { title } = req.body;
-//   if (!title) {
-//     res.status(400).json({
-//       message: "title is required",
-//     });
-//     return;
-//   }
+app.post("/user", (req, res) => {
+  const { title , age } = req.body;
+  if (!title && age) {
+    res.status(400).json({
+      message: "title & age is required",
+    });
+    return;
+  }
+app.get("/", (req, res) => {
+  res.send("hello world!");
+});
 
-//   users.push({
-//     title,
-//     id: Date.now(),
-//   });
+  users.push({
+    title,
+    age,
+    id: Date.now(),
+  });
 
-//   res.status(201).json({
-//     message: "user is created",
-//     data: users,
-//   });
-// });
+  res.status(201).json({
+    message: "user is created",
+    data: users,
+  });
+});
 
 // // get all user
 // app.get("/users", (req, res) => {
