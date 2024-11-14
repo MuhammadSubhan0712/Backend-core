@@ -1,8 +1,22 @@
 
 
-const express = require('express')
+// const express = require('express')
+
+import express from 'express'
 const app = express()
-const port = 3000;
+const port = 3000
+
+app.use(express.json())
+
+
+app.get('/' , (req , res) => {
+  res.send("Hello World With Subhan")
+})
+
+
+app.listen(port,() => {
+console.log(`Server is running on port==> ${port}`);
+})
 
 
 
@@ -24,16 +38,16 @@ const port = 3000;
 
 
 
-const users = [];
-// // add new user
-app.post("/user", (req, res) => {
-  const { title , age } = req.body;
-  if (!title && age) {
-    res.status(400).json({
-      message: "title & age is required",
-    });
-    return;
-  }
+// const users = [];
+// // // add new user
+// app.post("/user", (req, res) => {
+//   const { title , age } = req.body;
+//   if (!title && age) {
+//     res.status(400).json({
+//       message: "title & age is required",
+//     });
+//     return;
+//   }
 // app.get("/", (req, res) => {
 //   res.send("hello world!");
 // });
@@ -43,11 +57,11 @@ app.post("/user", (req, res) => {
 //     id: Date.now(),
 //   });
 
-  res.status(201).json({
-    message: "user is created",
-    data: users,
-  });
-});
+//   res.status(201).json({
+//     message: "user is created",
+//     data: users,
+//   });
+// });
 
 // // get all user
 // app.get("/users", (req, res) => {
