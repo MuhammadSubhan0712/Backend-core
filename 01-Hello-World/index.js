@@ -1,53 +1,50 @@
-
-
-const express = require('express')
+const express = require("express");
 
 // import express from 'express'
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-app.use(express.json())
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello World With Subhan");
+});
+
+app.get("/about", (req, res) => {
+  res.send("(!)(!)You're in about(!)(!)");
+});
+
+app.get("/contact", (req, res) => {
+  res.send("(: Contact with me! :) ");
+});
+
+const users = [];
+app.post("/user", (req, res) => {
+  const { name, age } = req.body;
+  if (!name && !age) {
+    res.status(400).json({
+      message: "Something missing"
+    })
+  }
+  users.push({
+    name,
+    age,
+    id: Date.now(),
+  });
+  res.status(201).json({ users });
+});
 
 
-app.get('/' , (req , res) => {
-  res.send("Hello World With Subhan")
+
+app.post ("/user/:id" , (req , res) => {
+  const {id} =  res.params
 })
 
 
-app.get('/about' , (req , res) => {
-  res.send("(!)(!)You're in about(!)(!)")
-})
+app.listen(port, () => {
+  console.log(`Server is running on port==> ${port}`);
+});
 
-
-app.get('/contact' , (req , res) => {
-  res.send("(: Contact with me! :) ")
-})
-
-app.listen(port,() => {
-console.log(`Server is running on port==> ${port}`);
-})
-
-
-
-
-
-
-// app.get('/', (req, res) => {
-//   res.send('Hello With the new!')
-// })
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
-// console.log("Hello Me With the new World")
-
-
-
-
-
-
-
-// const users = [];
 // // // add new user
 // app.post("/user", (req, res) => {
 //   const { title , age } = req.body;
