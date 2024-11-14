@@ -1,8 +1,12 @@
-const express = require("express");
 
-// import express from 'express'
+import dotenv from "dotenv"
+dotenv.config()
+
+ 
+
+import express from 'express'
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 
@@ -40,6 +44,12 @@ app.post("/user", (req, res) => {
   });
 });
 
+app.get("/users" , (req , res ) => {
+  res.status(200).json({
+    message:"All users ==>",
+    users,
+  });
+});
 
 
 app.post ("/user/:id" , (req , res) => {
