@@ -66,24 +66,3 @@ console.log("Hello World With the new")
 //   });
 // });
 
-// // get single user
-// app.get("/user/:id", (req, res) => {
-//   const { id } = req.params;
-
-//   const index = users.findIndex((item) => item.id === +id);
-
-//   if (index === -1) {
-//     res.status(404).json({
-//       message: "user not found",
-//     });
-//     return;
-//   }
-
-//   res.status(200).json({
-//     data: users[index],
-//   });
-// });
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
