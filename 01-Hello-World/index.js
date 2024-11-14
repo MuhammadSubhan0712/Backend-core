@@ -1,8 +1,8 @@
 
 
-// const express = require('express')
+const express = require('express')
 
-import express from 'express'
+// import express from 'express'
 const app = express()
 const port = 3000
 
@@ -11,6 +11,11 @@ app.use(express.json())
 
 app.get('/' , (req , res) => {
   res.send("Hello World With Subhan")
+})
+
+
+app.get('/about' , (req , res) => {
+  res.send("(!)(!)You're in about(!)(!)")
 })
 
 
