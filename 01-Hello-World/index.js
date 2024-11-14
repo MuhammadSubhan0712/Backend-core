@@ -19,19 +19,25 @@ app.get("/contact", (req, res) => {
 });
 
 const users = [];
+
+// For new user
 app.post("/user", (req, res) => {
   const { name, age } = req.body;
   if (!name && !age) {
     res.status(400).json({
-      message: "Something missing"
-    })
+      message: "Something missing",
+    });
+    return
   }
   users.push({
     name,
     age,
     id: Date.now(),
   });
-  res.status(201).json({ users });
+  res.status(201).json({
+    message:"user is created =>", 
+    users ,
+  });
 });
 
 
@@ -44,30 +50,6 @@ app.post ("/user/:id" , (req , res) => {
 app.listen(port, () => {
   console.log(`Server is running on port==> ${port}`);
 });
-
-// // // add new user
-// app.post("/user", (req, res) => {
-//   const { title , age } = req.body;
-//   if (!title && age) {
-//     res.status(400).json({
-//       message: "title & age is required",
-//     });
-//     return;
-//   }
-// app.get("/", (req, res) => {
-//   res.send("hello world!");
-// });
-//   users.push({
-//     title,
-//     age,
-//     id: Date.now(),
-//   });
-
-//   res.status(201).json({
-//     message: "user is created",
-//     data: users,
-//   });
-// });
 
 // // get all user
 // app.get("/users", (req, res) => {
