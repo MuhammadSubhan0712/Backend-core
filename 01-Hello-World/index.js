@@ -58,9 +58,9 @@ app.post("/user", (req, res) => {
     return;
   }
   users.unshift({
+    id: Date.now(),
     name,
     age,
-    id: Date.now(),
   });
   res.status(201).json({
     message: "user is created =>",
@@ -85,7 +85,7 @@ app.post("/user/:id", (req, res) => {
     res.status(404).json({
       message: "user not found",
     });
-    return;
+    return;``
   }
 
   res.status(200).json({
