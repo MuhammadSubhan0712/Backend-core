@@ -82,6 +82,11 @@ app.delete("/todo/:id", (req, res) => {
 
 // To edit Todo:
 
+app.put("/todo/:id" , ( req , res ) =>{
+         const { id } = req.params;
+         const index = Todo.findIndex((item) => item.id === +id);
+        
+ })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
