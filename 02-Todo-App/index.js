@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 const Todo = [];
 app.use(express.json());
 
-// To add todo
+// To add todo:
 app.post("/todo", (req, res) => {
   const { addtodo } = req.body;
   if (!addtodo) {
