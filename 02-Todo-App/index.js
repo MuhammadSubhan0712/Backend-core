@@ -20,6 +20,7 @@ app.post("/todo" , (req , res) => {
         });
         return
     }
+   
     Todo.unshift({
         id:Date.now() ,
         addtodo,
@@ -32,14 +33,22 @@ res.status(200).json({
 
 // To get all todos
 app.get("/todos" , (req , res ) => {
+
+   if (Todo.length === 0) {
+    res.status(400).json({
+        message:"No todos entered yet",
+        Todo,
+    })
+    return;
+   }
     res.status(200).json({
-        message:"ALL Todos ==>",
+        message:"ALL Todos =>",
         Todo,
     })
 })
 
 // To get single todo 
-app.post("/todo:/id" , (req , res) =>{
+app.post("/todo/:id" , (req , res) =>{
     const { id } = req.params;
     const index = Todo.findIndex((item) => item.id === +id);
 
