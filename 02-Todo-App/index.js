@@ -93,6 +93,13 @@ app.put("/todo/:id" , ( req , res ) =>{
           }
           Todo.splice(index, 1);
           const {editTodo} = req.body;
+          
+          if (!addtodo) {
+            res.status(400).json({
+              message: "You must add todo",
+            });
+            return;
+          }
           Todo.unshift({
             id:Date.now(),
             Todo:editTodo,
