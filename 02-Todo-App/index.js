@@ -1,5 +1,5 @@
 const express = require('express')
-const { todo } = require('node:test')
+
 const app = express()
 const port = 3000
 
@@ -37,6 +37,26 @@ app.get("/todos" , (req , res ) => {
         Todo,
     })
 })
+
+// To get single todo 
+app.post("/todo:/id" , (req , res) =>{
+    const { id } = req.params;
+    const index = Todo.findIndex((item) => item.id === +id);
+
+    if (index === -1) {
+        res.status(400).json({
+            message:"No todo found",
+        });
+        return;
+    }
+    res.status(200).json(
+        {
+            message:"Your Todo",
+            Data:Todo[index],
+        }
+    )
+})
+
 
 
 
