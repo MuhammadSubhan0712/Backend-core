@@ -92,9 +92,13 @@ app.put("/todo/:id" , ( req , res ) =>{
             return;
           }
           Todo.splice(index, 1);
-          
+          const {editTodo} = req.body;
+          Todo.unshift({
+            id:Date.now(),
+            Todo:editTodo,
+})
           res.status(200).json({
-            message: "Todo Deleted Successfully",
+            message: "Todo Edited Successfully",
             Todo,
           });
  })
