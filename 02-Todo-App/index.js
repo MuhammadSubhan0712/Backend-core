@@ -96,7 +96,7 @@ app.put("/todo/:id", (req, res) => {
 
   if (!editTodo) {
     res.status(400).json({
-      message: "You must add todo",
+      message: "You must add new edited todo",
     });
     return;
   }
