@@ -23,7 +23,7 @@ app.post("/todo" , (req , res) => {
    
     Todo.unshift({
         id:Date.now() ,
-        addtodo,
+        Todo:addtodo,
 });
 res.status(200).json({
     message:"Todo entered successfully",
