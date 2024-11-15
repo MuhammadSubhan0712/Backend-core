@@ -71,8 +71,18 @@ app.post("/todo/:id" , (req , res) =>{
 app.delete("/todo/:id", (req, res) => {
     const { id } = req.params;
     const index = Todo.findIndex((item) => item.id === +id)
+    if (index === -1) {
+        res.status(400).json({
+            message:"No todo found",
+        });
+        return;
+    }
+    Todo.splice(index , 1) 
+    res.status(200).json({
+        message:"Todo Deleted Successfully",
+        Todo,
+    })
 
-    
  })
 
 
