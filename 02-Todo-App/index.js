@@ -30,7 +30,7 @@ app.post("/todo", (req, res) => {
   });
 });
 
-// To get all todos
+// To get all todos:
 app.get("/todos", (req, res) => {
   if (Todo.length === 0) {
     res.status(400).json({
@@ -45,7 +45,7 @@ app.get("/todos", (req, res) => {
   });
 });
 
-// To get single todo
+// To get single todo:
 app.post("/todo/:id", (req, res) => {
   const { id } = req.params;
   const index = Todo.findIndex((item) => item.id === +id);
