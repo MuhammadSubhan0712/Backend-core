@@ -66,7 +66,14 @@ app.post("/todo/:id" , (req , res) =>{
     )
 })
 
+// To delete Specific Todo: 
 
+app.delete("/todo/:id", (req, res) => {
+    const { id } = req.params;
+    const index = Todo.findIndex((item) => item.id === +id)
+
+    
+ })
 
 
 
