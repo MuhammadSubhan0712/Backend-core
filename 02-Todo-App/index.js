@@ -82,33 +82,33 @@ app.delete("/todo/:id", (req, res) => {
 
 // To edit Todo:
 
-app.put("/todo/:id" , ( req , res ) =>{
-         const { id } = req.params;
-         const index = Todo.findIndex((item) => item.id === +id);
-         if (index === -1) {
-            res.status(400).json({
-              message: "No todo found",
-            });
-            return;
-          }
-          Todo.splice(index, 1);
-          const {editTodo} = req.body;
+app.put("/todo/:id", (req, res) => {
+  const { id } = req.params;
+  const index = Todo.findIndex((item) => item.id === +id);
+  if (index === -1) {
+    res.status(400).json({
+      message: "No todo found",
+    });
+    return;
+  }
+  Todo.splice(index, 1);
+  const { editTodo } = req.body;
 
-          if (!editTodo) {
-            res.status(400).json({
-              message: "You must add todo",
-            });
-            return;
-          }
-          Todo = ({
-            id:Date.now(),
-            Todo:editTodo,
-})
-          res.status(200).json({
-            message: "Todo Edited Successfully",
-            Todo,
-          });
- })
+  if (!editTodo) {
+    res.status(400).json({
+      message: "You must add todo",
+    });
+    return;
+  }
+  Todo = {
+    id: Date.now(),
+    Todo: editTodo,
+  };
+  res.status(200).json({
+    message: "Todo Edited Successfully",
+    Todo,
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
