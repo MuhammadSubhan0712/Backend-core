@@ -100,7 +100,7 @@ app.put("/todo/:id" , ( req , res ) =>{
             });
             return;
           }
-          Todo.unshift({
+          Todo = ({
             id:Date.now(),
             Todo:editTodo,
 })
