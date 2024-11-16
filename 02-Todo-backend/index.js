@@ -102,6 +102,7 @@ app.put("/todo/:id", (req, res) => {
   }
   Todo[index] = {
     ...Todo[index],
+    id,
     title: editTodo,
   };
   res.status(200).json({
