@@ -12,17 +12,17 @@ app.use(express.json());
 
 // To add todo:
 app.post("/todo", (req, res) => {
-  const { addtodo } = req.body;
-  if (!addtodo) {
+  const { title } = req.body;
+  if (!title) {
     res.status(400).json({
       message: "You must add todo",
     });
     return;
   }
 
-  Todo.unshift({
+  Todo.push({
     id: Date.now(),
-    Todo: addtodo,
+    title,
   });
   res.status(200).json({
     message: "Todo entered successfully",
@@ -100,8 +100,9 @@ app.put("/todo/:id", (req, res) => {
     });
     return;
   }
-  Todo = {
-    Todo: editTodo,
+  Todo[index] = {
+    ...Todo[index],
+    title: editTodo,
   };
   res.status(200).json({
     message: "Todo Edited Successfully",
