@@ -11,5 +11,14 @@ const  addTodo = (req , res ) =>{
         res.status(400).json({
             message:"Title or descirption both required",
         })
+        return
     }
+
+    const todo = Todos.create({
+        title , 
+        description,
+    });
+    res.status(201).json({
+        message:"Todo added to the database successfully",
+    })
 }
