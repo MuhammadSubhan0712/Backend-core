@@ -9,7 +9,7 @@ const  addTodo = (req , res ) =>{
 
     if (!title || !description) {
         res.status(400).json({
-            message:"Title or descirption both required",mongodb+srv://muhammadsubhan0712:<db_password>@cluster0.7nasb.mongodb.net/
+            message:"Title or descirption both required",
         })
     }
 }
