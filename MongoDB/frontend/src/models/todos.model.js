@@ -15,8 +15,7 @@ const todoSchema = new Schema(
     },
   },
   {
-    timestamps: true,
+   timestamps: true,
   }
 );
-
 export default mongoose.model("Todos", todoSchema);
