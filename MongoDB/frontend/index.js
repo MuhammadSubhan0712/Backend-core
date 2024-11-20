@@ -16,4 +16,12 @@ app.get("/" , (req , res ) => {
 
 
 // routes
+app.use("/api/v1" , todosRoutes);
 
+connectDB()
+.then(() =>{
+    app.listen(process.env.PORT, () =>{
+        console.log(`Server is running at port: ${process.env.PORT}`);;
+        
+    })
+})
