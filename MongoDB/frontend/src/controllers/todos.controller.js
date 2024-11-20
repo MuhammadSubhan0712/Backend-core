@@ -12,7 +12,6 @@ const addTodo = (req, res) => {
     });
     return;
   }
-
   const todo = Todos.create({
     title,
     description,
