@@ -1,11 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
-
 import express from "express";
-
-import connectDB from "./src/db/index.js";
+// const express = require("express");
+import connectDB from "./src/db/index.js"
 import todosRoutes from "./src/routes/todos.routes.js";
-import { error } from "console";
 
 const app = express();
 
