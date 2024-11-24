@@ -73,6 +73,9 @@ export const getsingleTodo = (req , res) =>{
 export const deleteTodo = (req , res) =>{
   const { id } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
   const deletetodo = Todos.findById({});
 
   try {
@@ -86,14 +89,12 @@ export const deleteTodo = (req , res) =>{
     res.status(200).json({
       message:"Todo deleted Successfully",
     })
-  } catch (error) {
-    
+  } 
+  catch (error) {
+      res.status(400).json({
+      message:"Error ==>",error
+    })
   }
-
-  res.status(200).json({
-    message:"All Todos ==>",
-    Todos,
-  })
 }
 
 
