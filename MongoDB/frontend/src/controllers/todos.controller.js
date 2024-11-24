@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import Todos from "../models/todos.model.js";
 
 // add todo
-
 export const addTodo = (req, res) => {
   const { title, description } = req.body;
 
@@ -39,12 +38,9 @@ export const getallTodos = (req , res) =>{
 
 
 
-// To get all single todo
-
+// To get single todo
 export const getsingleTodo = (req , res) =>{
   const { id } = req.params;
-   
-  
   if(!Todos){
     res.status(400).json({
       message:"No Todos added Yet",
@@ -57,3 +53,43 @@ export const getsingleTodo = (req , res) =>{
     Todos,
   })
 }
+
+
+
+// To delete single todo
+
+export const deleteTodo = (req , res) =>{
+  const { id } = req.params;
+  if(!Todos){
+    res.status(400).json({
+      message:"No Todos added Yet",
+      Todos,
+    })
+    return;
+  }
+  res.status(200).json({
+    message:"All Todos ==>",
+    Todos,
+  })
+}
+
+
+
+// To edit single todo
+
+export const editTodo = (req , res) =>{
+  const { id } = req.params;
+  if(!Todos){
+    res.status(400).json({
+      message:"No Todos added Yet",
+      Todos,
+    })
+    return;
+  }
+  res.status(200).json({
+    message:"All Todos ==>",
+    Todos,
+  })
+}
+
+
