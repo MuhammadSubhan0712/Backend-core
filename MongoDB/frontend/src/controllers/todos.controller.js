@@ -117,13 +117,18 @@ export const editTodo = (req , res) =>{
       return;
     }
      edittodo.splice(id , 1)
-     const {title , description} = req.body;
-     if (!title || !description) {
+     const {updtitle , upddescription} = req.body;
+     if (!updtitle || !upddescription) {
       res.status(400).json({
         message: "You must enter both fields",
       })
       return;
     }
+    const updTodo = Todos.findByIdAndUpdate(id , {updtitle , upddescription});
+    res.status(200).json({
+      message:"Todo Updated",
+      todo : updTodo,
+    })
   } 
   catch (error) {
     res.status(400).json({
