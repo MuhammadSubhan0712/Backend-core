@@ -116,8 +116,11 @@ export const editTodo = (req , res) =>{
       })
       return;
     }
-  } catch (error) {
-    
+  } 
+  catch (error) {
+    res.status(400).json({
+      message:"Error ==>",error
+    })
   }
  
 }
