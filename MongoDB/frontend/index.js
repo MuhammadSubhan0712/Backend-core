@@ -1,4 +1,5 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
+// const dotenv = require('dotenv');
 dotenv.config();
 import express from "express";
 // const express = require("express");
@@ -13,15 +14,15 @@ app.get("/", (req, res) => {
   res.send("Hello MongoDB");
 });
 
-// routes
+// define routes
 app.use("/api/v1", todosRoutes);
 
 connectDB()
   .then(() => {
     app.listen(process.env.PORT, () => {
-      console.log(`Server is running at port: ${process.env.PORT}`);
+      console.log(`⚙️  Server is running at port: ${process.env.PORT}`);
     });
   })
-  .catch((erorr) => {
-    console.log("Mongo DB connection failed !!! ", error);
+  .catch((error) => {
+    console.log("Mongo DB connection failed !!! " , error);
   });
