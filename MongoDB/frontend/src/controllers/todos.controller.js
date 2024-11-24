@@ -22,18 +22,21 @@ export const addTodo = (req, res) => {
 
 // To get all todos
 
-export const getallTodos = (req , res) =>{
-  if(!Todos){
+export const getallTodos = async (req , res) =>{
+   try {
+    const todo =  await Todos.find({})
+    res.status(200).json({
+      message:"All Todos ==>",
+      todo,
+    })  
+   } catch (error) {
     res.status(400).json({
-      message:"No Todos added Yet",
-      Todos,
+      message:"Error =>",error
     })
-    return;
-  }
-  res.status(200).json({
-    message:"All Todos ==>",
-    Todos,
-  })
+    
+   }
+  
+
 }
 
 
@@ -41,32 +44,52 @@ export const getallTodos = (req , res) =>{
 // To get single todo
 export const getsingleTodo = (req , res) =>{
   const { id } = req.params;
-  if(!Todos){
-    res.status(400).json({
-      message:"No Todos added Yet",
-      Todos,
-    })
-    return;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
   }
-  res.status(200).json({
-    message:"All Todos ==>",
-    Todos,
-  })
+  try {
+    const singletodo = Todos.findById(id);
+    if (!singletodo) {
+      res.status(400).json({
+        message:"No Todo found",
+      })
+      return;
+    }
+    res.status(200).json({
+      message:"Your Todo:",
+      singletodo,
+    })
+  } catch (error) {
+    res.status(400).json({
+      message:"Error ==>",error
+    })
+  }
 }
 
 
 
 // To delete single todo
-
 export const deleteTodo = (req , res) =>{
   const { id } = req.params;
-  if(!Todos){
-    res.status(400).json({
-      message:"No Todos added Yet",
-      Todos,
+
+  const deletetodo = Todos.findById({});
+
+  try {
+    if(!deletetodo){
+      res.status(400).json({
+        message:"No Todo found",
+      })
+      return;
+    }
+    Todos.splice( 1 , id)
+    res.status(200).json({
+      message:"Todo deleted Successfully",
     })
-    return;
+  } catch (error) {
+    
   }
+
   res.status(200).json({
     message:"All Todos ==>",
     Todos,
@@ -79,6 +102,11 @@ export const deleteTodo = (req , res) =>{
 
 export const editTodo = (req , res) =>{
   const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+  const todo = 
   if(!Todos){
     res.status(400).json({
       message:"No Todos added Yet",
