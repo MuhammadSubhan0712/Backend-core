@@ -116,6 +116,8 @@ export const editTodo = (req , res) =>{
       })
       return;
     }
+     edittodo.splice(id , 1)
+     const {updtodo} = req.body;
   } 
   catch (error) {
     res.status(400).json({
