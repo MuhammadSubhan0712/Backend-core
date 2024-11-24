@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post("/todo", addTodo);
 router.get("/todos" , getallTodos);
-router.get("todo/:id" , getsingleTodo);
-router.delete("todo/:id" , deleteTodo);
-router.put("todo/:id" , editTodo);
+router.get("/todo/:id" , getsingleTodo);
+router.delete("/todo/:id" , deleteTodo);
+router.put("/todo/:id" , editTodo);
 
 export default router;
