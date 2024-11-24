@@ -1,9 +1,7 @@
-import dotenv from 'dotenv';
-// const dotenv = require('dotenv');
+import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-// const express = require("express");
-import connectDB from "./src/db/index.js"
+import connectDB from "./src/db/index.js";
 import todosRoutes from "./src/routes/todos.routes.js";
 
 const app = express();
@@ -24,5 +22,5 @@ connectDB()
     });
   })
   .catch((error) => {
-    console.log("Mongo DB connection failed !!! " , error);
+    console.log("Mongo DB connection failed !!! ", error);
   });
