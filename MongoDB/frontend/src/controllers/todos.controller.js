@@ -85,7 +85,7 @@ export const deleteTodo = (req , res) =>{
       })
       return;
     }
-    Todos.splice( 1 , id)
+    Todos.splice( id , 1)
     res.status(200).json({
       message:"Todo deleted Successfully",
     })
@@ -117,7 +117,13 @@ export const editTodo = (req , res) =>{
       return;
     }
      edittodo.splice(id , 1)
-     const {updtodo} = req.body;
+     const {title , description} = req.body;
+     if (!title || !description) {
+      res.status(400).json({
+        message: "You must enter both fields",
+      })
+      return;
+    }
   } 
   catch (error) {
     res.status(400).json({
