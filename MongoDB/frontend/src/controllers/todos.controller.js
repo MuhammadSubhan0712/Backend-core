@@ -107,18 +107,19 @@ export const editTodo = (req , res) =>{
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid ID" });
   }
-  const todo = 
-  if(!Todos){
-    res.status(400).json({
-      message:"No Todos added Yet",
-      Todos,
-    })
-    return;
+  const edittodo = Todos.findById({})
+  
+  try {
+    if(!edittodo){
+      res.status(400).json({
+        message:"No Todo Found",
+      })
+      return;
+    }
+  } catch (error) {
+    
   }
-  res.status(200).json({
-    message:"All Todos ==>",
-    Todos,
-  })
+ 
 }
 
 
