@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 
 import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
+import { LuListTodo } from "react-icons/lu";
 
 function App() {
   const [todo, setTodo] = useState([]);
@@ -34,6 +35,8 @@ function App() {
   };
 
   return (
+    <>
+    <div> 
     <div
       className="container my-5 p-5 rounded shadow-lg"
       style={{
@@ -42,7 +45,7 @@ function App() {
       }}
     >
       <h2 className="text-center mb-4">
-        <FaPlusCircle className="me-2" />
+        <LuListTodo className="me-2" />
         Todo List
       </h2>
 
@@ -60,7 +63,7 @@ function App() {
       </form>
 
       {/* Todo List */}
-      <ul className="list-group">
+      <ul className="container list-group">
         {todo.map((item, index) => (
           <li
             key={index}
@@ -90,6 +93,8 @@ function App() {
         ))}
       </ul>
     </div>
+    </div>
+    </>
   );
 }
 
