@@ -1,35 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useRef } from "react";
+import "./App.css";
 
+// Create Component
 function App() {
-  const [count, setCount] = useState(0)
+  const [todo, setTodo] = useState([]);
+  const todoVal = useRef();
+
+  // To add  todo
+  const addTodo = (event) => {
+    event.preventDefault();
+
+    if (todoVal.current.value === "") {
+      alert("Please Enter todo");
+    } 
+    else {
+      todo.push(todoVal.current.value);
+      setTodo([...todo]);
+      console.log(todo);
+      todoVal.current.value = "";
+    }
+  };
+
+  // To Edit Todo
+  const EditTodo = (index) => {
+    const editVal = prompt("Enter Updated Value");
+    todo.splice(index, 1, editVal);
+    setTodo([...todo]);
+  };
+
+  // To Delete Todo
+  const DeletTodo = (index) => {
+    todo.splice(index, 1);
+    setTodo([...todo]);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container">
+        <h2>Todo</h2>
+
+        {/* Todo form  */}
+        <form className="styled-form" onSubmit={addTodo}>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control width-25px"
+              placeholder="Enter Todo"
+              ref={todoVal}
+            />
+          </div>
+
+          <button className="btn-add" type="submit">
+            {" "}
+            Add Todo{" "}
+          </button>
+        </form>
+
+        {/* Todo List  */}
+
+        <ul className="styled-list">
+          {todo.map((item, index) => {
+            return (
+              <div key={index}>
+                <li>{item}</li>
+                <button
+                  onClick={() => EditTodo(index)}
+                  type="submit"
+                  className="btn-success">
+                  Edit
+                </button>
+                <button
+                  onClick={() => DeletTodo(index)}
+                  type="submit"
+                  className="btn-danger">
+                  Delete
+                </button>
+              </div>
+            );
+          })}
+        </ul>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
