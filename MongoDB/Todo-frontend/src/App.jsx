@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./App.css"
 import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
@@ -8,18 +8,33 @@ function App() {
   const title = useRef();
   const description = useRef();
 
+  
+  // Get All Data 
+  useEffect(() => {
+    const getalldata = async() =>{
+      try {
+        const res = await axios.get("http://localhost:3000/api/v1/todos")
+        setTodo(res.data.todo) ;
+        console.log(res.data.todo);
+        
+      } catch (error) {
+        console.log("Error getting data ==>" ,error);
+      }
+    };
+    getalldata();
+  },[])
+  
   // Add a new todo
   const addTodo = async(event) => {
     event.preventDefault();
 
     try {
-    await axios.post("http://localhost:3000/api/v1/todo")
-    .then(res =>{
-    console.log(res.data);
-    })
-    .catch(error => {
-      console.log(error);
-    })
+   const res = await axios.post("http://localhost:3000/api/v1/todo" ,)
+   console.log("User added successfully " , res.data);
+   const newtodo = await axios.get("http://localhost:3000/api/v1/todos");
+   alert("Todo added successfully in database");
+   setTodo(newtodo.data.todo);
+   
     } catch (error) {
       console.log(error);
     }
