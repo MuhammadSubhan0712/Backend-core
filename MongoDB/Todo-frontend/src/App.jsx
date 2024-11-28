@@ -64,12 +64,15 @@ function App() {
     }
 
     try {
-      editTodo = await axios.put(`http://localhost:3000/api/v1/todo/${id}`)
-      
+     const editTodo = await axios.put(`http://localhost:3000/api/v1/todo/${id}`)
+      console.log("Editing todo ", editTodo.data);
+      alert("Todo edit successfully");
+      const res = await axios.get("http://localhost:3000/api/v1/todos")
+      setTodo(res.data);
     } 
     catch (error) {
-      console.log(error);
-      
+      console.log("Error Occured",error);
+      alert("Error Occured",error);  
     }
   };
 
