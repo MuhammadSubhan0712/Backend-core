@@ -51,11 +51,25 @@ function App() {
   };
 
   // Edit an existing todo
-  const EditTodo = (index) => {
-    const editVal = prompt("Enter Updated Value", todo[index]);
-    if (editVal) {
-      todo.splice(index, 1, editVal);
-      setTodo([...todo]);
+  const EditTodo = async(item , id) => {
+    const editTitle = prompt("Enter Title", item.title);
+    const editdescription = prompt("Enter Title", item.description);
+    const UpdTodo = {
+      title: editTitle,
+      description: editdescription,
+    }
+    if (!editTitle || !editdescription) {
+      alert("You must edit both fields")
+    return;
+    }
+
+    try {
+      editTodo = await axios.put(`http://localhost:3000/api/v1/todo/${id}`)
+      
+    } 
+    catch (error) {
+      console.log(error);
+      
     }
   };
 
@@ -67,7 +81,8 @@ function App() {
       const res = await axios.get("http://localhost:3000/api/v1/todos")
       setTodo(res.data.todo)
     } catch (error) {
-      
+      console.log("Error Occured:" ,error);
+      alert("Error Occured:" ,error);
     }
   };
 
