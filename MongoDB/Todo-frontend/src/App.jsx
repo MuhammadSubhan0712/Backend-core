@@ -27,20 +27,20 @@ function App() {
   // Add a new todo
   const addTodo = async(event) => {
     event.preventDefault();
-
+  
     try {
    const res = await axios.post("http://localhost:3000/api/v1/todo" ,)
    console.log("User added successfully " , res.data);
    const newtodo = await axios.get("http://localhost:3000/api/v1/todos");
    alert("Todo added successfully in database");
    setTodo(newtodo.data.todo);
-   
+   title.current.value="";
+   description.current.value="";
+
     } catch (error) {
-      console.log(error);
+      console.log("Error Occcured:",error);
     }
     
-   
-
     if (title.current.value === "" || description.current.value === "") {
       alert("You must fill all input fields");
     } 
