@@ -1,21 +1,37 @@
 import { useState, useRef } from "react";
-
+import "./App.css"
 import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
-
+import axios from "axios";
 function App() {
   const [todo, setTodo] = useState([]);
-  const todoVal = useRef();
+  const title = useRef();
+  const description = useRef();
 
   // Add a new todo
-  const addTodo = (event) => {
+  const addTodo = async(event) => {
     event.preventDefault();
 
-    if (todoVal.current.value === "") {
-      alert("Please Enter a todo");
-    } else {
-      setTodo([...todo, todoVal.current.value]);
-      todoVal.current.value = "";
+    try {
+    await axios.post("http://localhost:3000/api/v1/todo")
+    .then(res =>{
+    console.log(res.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    } catch (error) {
+      console.log(error);
+    }
+    
+   
+
+    if (title.current.value === "" || description.current.value === "") {
+      alert("You must fill all input fields");
+    } 
+    else {
+      setTodo([...todo, title.current.value , description.current.value]);
+      title.current.value = "";
     }
   };
 
@@ -54,8 +70,15 @@ function App() {
         <input
           type="text"
           className="form-control"
-          placeholder="Enter your todo"
-          ref={todoVal}
+          placeholder="Todo"
+          ref={title}
+        />
+
+<input
+          type="text"
+          className="form-control"
+          placeholder="Description"
+          ref={description}
         />
         <button className="btn btn-light shadow-sm" type="submit">
           Add <FaPlusCircle />
