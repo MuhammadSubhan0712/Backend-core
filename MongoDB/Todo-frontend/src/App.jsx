@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import "./App.css"
+import "./App.css";
 import { FaEdit, FaTrashAlt, FaPlusCircle } from "react-icons/fa";
 import { LuListTodo } from "react-icons/lu";
 import axios from "axios";
@@ -8,154 +8,162 @@ function App() {
   const title = useRef();
   const description = useRef();
 
-  
-  // Get All Data 
+  // Get All Data
   useEffect(() => {
-    const getalldata = async() =>{
+    const getalldata = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/todos")
-        setTodo(res.data.todo) ;
+        const res = await axios.get("http://localhost:3000/api/v1/todos");
+        setTodo(res.data.todo);
         console.log(res.data.todo);
-        
       } catch (error) {
-        console.log("Error getting data ==>" ,error);
+        console.log("Error getting data ==>", error);
       }
     };
     getalldata();
-  },[])
-  
-  // Add a new todo
-  const addTodo = async(event) => {
-    event.preventDefault();
-  
-    try {
-   const res = await axios.post("http://localhost:3000/api/v1/todo" ,)
-   console.log("User added successfully " , res.data);
-   const newtodo = await axios.get("http://localhost:3000/api/v1/todos");
-   alert("Todo added successfully in database");
-   setTodo(newtodo.data.todo);
-   title.current.value="";
-   description.current.value="";
+  }, []);
 
+  // Add a new todo
+  const addTodo = async (event) => {
+    event.preventDefault();
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/v1/todo");
+      console.log("User added successfully ", res.data);
+      const newtodo = await axios.get("http://localhost:3000/api/v1/todos");
+      alert("Todo added successfully in database");
+      setTodo(newtodo.data.todo);
+      title.current.value = "";
+      description.current.value = "";
     } catch (error) {
-      console.log("Error Occcured:",error);
+      console.log("Error Occcured:", error);
     }
-    
+
     if (title.current.value === "" || description.current.value === "") {
       alert("You must fill all input fields");
-    } 
-    else {
-      setTodo([...todo, title.current.value , description.current.value]);
+    } else {
+      setTodo([...todo, title.current.value, description.current.value]);
       title.current.value = "";
     }
   };
 
   // Edit an existing todo
-  const EditTodo = async(item , id) => {
+  const EditTodo = async (item, id) => {
     const editTitle = prompt("Enter Title", item.title);
     const editdescription = prompt("Enter Title", item.description);
     const UpdTodo = {
       title: editTitle,
       description: editdescription,
-    }
+    };
     if (!editTitle || !editdescription) {
-      alert("You must edit both fields")
-    return;
+      alert("You must edit both fields");
+      return;
     }
 
     try {
-     const editTodo = await axios.put(`http://localhost:3000/api/v1/todo/${id}`)
+      const editTodo = await axios.put(
+        `http://localhost:3000/api/v1/todo/${id}`
+      );
       console.log("Editing todo ", editTodo.data);
       alert("Todo edit successfully");
-      const res = await axios.get("http://localhost:3000/api/v1/todos")
+      const res = await axios.get("http://localhost:3000/api/v1/todos");
       setTodo(res.data);
-    } 
-    catch (error) {
-      console.log("Error Occured",error);
-      alert("Error Occured",error);  
+    } catch (error) {
+      console.log("Error Occured", error);
+      alert("Error Occured", error);
     }
   };
 
   // Delete a todo
-  const DeletTodo = async(id) => {
+  const DeletTodo = async (id) => {
     try {
-      const deletetodo = await axios.delete(`http://localhost:3000/api/v1/todo/${id}`)
+      const deletetodo = await axios.delete(
+        `http://localhost:3000/api/v1/todo/${id}`
+      );
       console.log("User to delete:", deletetodo.data);
-      const res = await axios.get("http://localhost:3000/api/v1/todos")
-      setTodo(res.data.todo)
+      const res = await axios.get("http://localhost:3000/api/v1/todos");
+      setTodo(res.data.todo);
     } catch (error) {
-      console.log("Error Occured:" ,error);
-      alert("Error Occured:" ,error);
+      console.log("Error Occured:", error);
+      alert("Error Occured:", error);
     }
   };
 
   return (
     <>
-    <div> 
-    <div
-      className="container my-5 p-5 rounded shadow-lg"
-      style={{
-        background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-        color: "#fff",
-      }}
-    >
-      <h2 className="text-center mb-4">
-        <LuListTodo className="me-2" />
-        Todo List
-      </h2>
+      <div>
+        <div
+          className="container my-5 p-5 rounded shadow-lg"
+          style={{
+            background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+            color: "#fff",
+          }}>
+          <h2 className="text-center mb-4">
+            <LuListTodo className="me-2" />
+            Todo List
+          </h2>
 
-      {/* Todo form */}
-      <form className="d-flex gap-2 mb-4" onSubmit={addTodo}>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Todo"
-          ref={title}
-        />
+          {/* Todo form */}
+          <form className="d-flex gap-2 mb-4" onSubmit={addTodo}>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Todo"
+              ref={title}
+            />
 
-<input
-          type="text"
-          className="form-control"
-          placeholder="Description"
-          ref={description}
-        />
-        <button className="btn btn-light shadow-sm" type="submit">
-          Add <FaPlusCircle />
-        </button>
-      </form>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Description"
+              ref={description}
+            />
+            <button className="btn btn-light shadow-sm" type="submit">
+              Add <FaPlusCircle />
+            </button>
+          </form>
 
-      {/* Todo List */}
-      <ul className="container list-group">
-        {todo.map((item, index) => (
-          <li
-            key={index}
-            className="list-group-item d-flex justify-content-between align-items-center mb-2 animate__animated animate__fadeIn"
-            style={{
-              background: "rgba(255, 255, 255, 0.1)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              color: "#fff",
-            }}
-          >
-            {item}
-            <div>
-              <button
-                onClick={() => EditTodo(index)}
-                className="btn btn-outline-warning btn-sm me-2"
-              >
-                <FaEdit />
-              </button>
-              <button
-                onClick={() => DeletTodo(index)}
-                className="btn btn-outline-danger btn-sm"
-              >
-                <FaTrashAlt />
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-    </div>
+          {/* Todo List */}
+          <ul className="container list-group">
+            {todo && todo.length > 0 ? (
+              todo.map((item, index) => (
+                <li
+                  key={index}
+                  className="list-group-item d-flex justify-content-between align-items-center mb-2 animate__animated animate__fadeIn"
+                  style={{
+                    background: "rgba(255, 255, 255, 0.1)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    color: "#fff",
+                  }}>
+                  {item}
+                  <div>
+                    <button
+                      onClick={() => {
+                        EditTodo(item, item._id);
+                      }}
+                      className="btn btn-outline-warning btn-sm me-2">
+                      <FaEdit />
+                    </button>
+                    <button
+                      onClick={() => {
+                        DeletTodo(item._id);
+                      }}
+                      className="btn btn-outline-danger btn-sm">
+                      <FaTrashAlt />
+                    </button>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <div className="d-flex justify-content-center p-3 mt-5 bg-dark border rounded">
+                <h2 className="text-center text-uppercase text-info">
+                  {" "}
+                  No Todo Found Yet
+                </h2>
+              </div>
+            )}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
