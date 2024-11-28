@@ -60,9 +60,15 @@ function App() {
   };
 
   // Delete a todo
-  const DeletTodo = (index) => {
-    todo.splice(index, 1);
-    setTodo([...todo]);
+  const DeletTodo = async(id) => {
+    try {
+      const deletetodo = await axios.delete(`http://localhost:3000/api/v1/todo/${id}`)
+      console.log("User to delete:", deletetodo.data);
+      const res = await axios.get("http://localhost:3000/api/v1/todos")
+      setTodo(res.data.todo)
+    } catch (error) {
+      
+    }
   };
 
   return (
