@@ -41,10 +41,20 @@ const registerUser = async(req , res) =>{
     }
 
 
-    
+
 // To Login User
-const loginUser = (user) =>{
+const loginUser = (req , res) =>{
+    const {email , password} = req.body;
+
+    if (!email || !password) {
+        res.status(400).json(()=>{
+            message:"You must enter email & password"
+        })
+    return;
+    }
+
     
+
 }
 // To logout User
 const logoutUser = (user) =>{
