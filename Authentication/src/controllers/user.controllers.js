@@ -1,6 +1,6 @@
 import User from "../models/user.models.js"
 import jwt from "jsonwebtoken"
-
+import bcrypt from "bcrypt"
 
 // To generate access token
 const generateAccessToken = (user) =>{
@@ -62,8 +62,30 @@ const loginUser = async(req , res) =>{
         return;
     }
 
-    
+    const isPasswordValid = await bcrypt.compare(password , user.password);
+
+    if (!isPasswordValid) {
+        res.status(400).json({
+            message:"Incorrect Password",
+        });
+    }
 }
+
+
+// To generate Token
+const accessToken = generateAccessToken(user);
+const refreshToken = generateRefreshToken(user);
+
+
+
+// Cookies
+res.cookie("refeshToken" , refreshToken, { http:true , secure: false });
+res.status(200).json({
+message:"User LoggedIn Successfully",
+accessToken,
+refreshToken,
+data:user,
+})
 // To logout User
 const logoutUser = (user) =>{
     
