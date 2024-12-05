@@ -19,7 +19,7 @@ const registerUser = async(req , res) =>{
     const {email , password } = req.body;
 
     if (!email || !password) {
-        res.status(400).json(()=>{
+        res.status(400).json({
             message:"You must enter email & password"
         })
     return;
@@ -27,7 +27,7 @@ const registerUser = async(req , res) =>{
 
     const user = await User.findOne({email : email});
     if (user) {
-        res.status(401).json(()=>{
+        res.status(401).json({
             message:"User Already Exist"
         });
     }
@@ -43,18 +43,26 @@ const registerUser = async(req , res) =>{
 
 
 // To Login User
-const loginUser = (req , res) =>{
+const loginUser = async(req , res) =>{
     const {email , password} = req.body;
 
     if (!email || !password) {
-        res.status(400).json(()=>{
+        res.status(400).json({
             message:"You must enter email & password"
         })
     return;
     }
 
-    
+    const user = await User.findOne({ email });
+   
+    if (!user) {
+        res.status(404).json({
+        message:"!No user found!",
+        });
+        return;
+    }
 
+    
 }
 // To logout User
 const logoutUser = (user) =>{
