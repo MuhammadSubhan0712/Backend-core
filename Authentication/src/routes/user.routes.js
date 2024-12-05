@@ -1,5 +1,27 @@
-import express from "express"
+import express from "express";
 
-import {registerUser , loginUser , logoutUser , refeshToken } from "../controllers/user.controllers.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refeshToken,
+} from "../controllers/user.controllers.js";
 
-const router  = express.Router();
+const router = express.Router();
+
+// To register User
+router.post("/register", registerUser);
+
+// To login User
+
+router.post("/login", loginUser);
+
+// To logout User
+
+router.post("/logout", logoutUser);
+
+// To refresh token
+
+router.post("/refreshtoken", refeshToken);
+
+export default router;
