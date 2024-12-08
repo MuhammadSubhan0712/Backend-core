@@ -15,17 +15,25 @@ cloudinary.config(
   
 )
  // Upload an image
- const uploadResult = await cloudinary.uploader
- .upload(
-     'https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg', {
-         public_id: 'shoes',
-     }
- )
- .catch((error) => {
-     console.log(error);
- });
+const uploadImageToCloudinary = async (localpath) => {
 
-console.log(uploadResult);
+  try {
+    const uploadResult = await cloudinary.uploader.upload(localpath , {
+      resource_type:"auto",
+    });
+    fs.unlinkSync(localpath);
+  return uploadResult.url;
+  }  
+  catch (error) {
+  console.log(error);
+  res.json({
+    message:"Error Occured ==>",
+    error
+  })
+  fs.unlinkSync(localpath)  ;
+  return null;
+  }
+  
 
 // To generate access token
 const generateAccessToken = (user) => {
