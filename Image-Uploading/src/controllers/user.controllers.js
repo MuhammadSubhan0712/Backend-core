@@ -1,6 +1,21 @@
 import User from "../models/user.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import {v2 as cloudinary} from "cloudinary"
+import fs from "fs"
+
+
+
+// cloudinary configuration
+cloudinary.config( 
+  cloud_name = "dgvvyk8lb", 
+  api_key = "144189743854563", 
+  api_secret = "<your_api_secret>",  // # Click 'View API Keys' above to copy your API secret
+  secure=True
+  
+)
+
+
 
 // To generate access token
 const generateAccessToken = (user) => {
