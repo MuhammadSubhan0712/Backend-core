@@ -16,7 +16,6 @@ cloudinary.config(
 )
  // Upload an image
 const uploadImageToCloudinary = async (localpath) => {
-
   try {
     const uploadResult = await cloudinary.uploader.upload(localpath , {
       resource_type:"auto",
@@ -33,7 +32,7 @@ const uploadImageToCloudinary = async (localpath) => {
   fs.unlinkSync(localpath)  ;
   return null;
   }
-  
+}
 
 // To generate access token
 const generateAccessToken = (user) => {
@@ -156,4 +155,28 @@ const refreshTokens = async (req, res) => {
   res.json({ decodedToken });
 };
 
+
+const uploadImage = async (req , res) => {
+  if (!req.file ) {
+    return res.status(400).json({
+      message:"No image file uploaded",
+    })
+  }
+
+  try {
+    const uploadResult = await uploadImageToCloudinary(req.file.path);
+
+    if (!uploadResult) {
+      return res.status(500).json({
+        message:"Error occured while uploading image",
+      });
+    }
+
+    res.json({
+      
+    })
+  } catch (error) {
+    
+  }
+}
 export { registerUser, loginUser, logoutUser, refreshTokens };
