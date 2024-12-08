@@ -8,14 +8,24 @@ import fs from "fs"
 
 // cloudinary configuration
 cloudinary.config( 
-  cloud_name = "dgvvyk8lb", 
-  api_key = "144189743854563", 
-  api_secret = "<your_api_secret>",  // # Click 'View API Keys' above to copy your API secret
+  cloud_name = process.env.CLOUD_NAME, 
+  api_key = process.env.API_KEY, 
+  api_secret = process.env.API_SECRET,  // # Click 'View API Keys' above to copy your API secret
   secure=True
   
 )
+ // Upload an image
+ const uploadResult = await cloudinary.uploader
+ .upload(
+     'https://res.cloudinary.com/demo/image/upload/getting-started/shoes.jpg', {
+         public_id: 'shoes',
+     }
+ )
+ .catch((error) => {
+     console.log(error);
+ });
 
-
+console.log(uploadResult);
 
 // To generate access token
 const generateAccessToken = (user) => {
