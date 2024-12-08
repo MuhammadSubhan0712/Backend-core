@@ -1,38 +1,34 @@
 import User from "../models/user.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import {v2 as cloudinary} from "cloudinary"
-import fs from "fs"
-
-
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
 
 // cloudinary configuration
-cloudinary.config( 
-  cloud_name = process.env.CLOUD_NAME, 
-  api_key = process.env.API_KEY, 
-  api_secret = process.env.API_SECRET,  // # Click 'View API Keys' above to copy your API secret
-  secure=True
-  
-)
- // Upload an image
+cloudinary.config(
+  (cloud_name = process.env.CLOUD_NAME),
+  (api_key = process.env.API_KEY),
+  (api_secret = process.env.API_SECRET), // # Click 'View API Keys' above to copy your API secret
+  (secure = True)
+);
+// Upload an image
 const uploadImageToCloudinary = async (localpath) => {
   try {
-    const uploadResult = await cloudinary.uploader.upload(localpath , {
-      resource_type:"auto",
+    const uploadResult = await cloudinary.uploader.upload(localpath, {
+      resource_type: "auto",
     });
     fs.unlinkSync(localpath);
-  return uploadResult.url;
-  }  
-  catch (error) {
-  console.log(error);
-  res.json({
-    message:"Error Occured ==>",
-    error
-  })
-  fs.unlinkSync(localpath)  ;
-  return null;
+    return uploadResult.url;
+  } catch (error) {
+    console.log(error);
+    res.json({
+      message: "Error Occured ==>",
+      error,
+    });
+    fs.unlinkSync(localpath);
+    return null;
   }
-}
+};
 
 // To generate access token
 const generateAccessToken = (user) => {
@@ -48,7 +44,6 @@ const generateRefreshToken = (user) => {
     expiresIn: "7d",
   });
 };
-
 
 // To register the User
 const registerUser = async (req, res) => {
@@ -105,16 +100,15 @@ const loginUser = async (req, res) => {
       message: "Incorrect Password",
     });
   }
-  
 
-// Cookies
-res.cookie("refreshToken", refreshToken, { http: true, secure: false });
-res.status(200).json({
-  message: "User LoggedIn Successfully",
- accessToken : generateAccessToken(user),
- refreshToken : generateRefreshToken(user),
-  data: user,
-});
+  // Cookies
+  res.cookie("refreshToken", refreshToken, { http: true, secure: false });
+  res.status(200).json({
+    message: "User LoggedIn Successfully",
+    accessToken: generateAccessToken(user),
+    refreshToken: generateRefreshToken(user),
+    data: user,
+  });
 };
 
 // To logout user
@@ -124,8 +118,6 @@ const logoutUser = async (req, res) => {
     message: "User Logout Successfully",
   });
 };
-
-
 
 // To refresh token
 const refreshTokens = async (req, res) => {
@@ -155,12 +147,11 @@ const refreshTokens = async (req, res) => {
   res.json({ decodedToken });
 };
 
-
-const uploadImage = async (req , res) => {
-  if (!req.file ) {
+const uploadImage = async (req, res) => {
+  if (!req.file) {
     return res.status(400).json({
-      message:"No image file uploaded",
-    })
+      message: "No image file uploaded",
+    });
   }
 
   try {
@@ -168,15 +159,17 @@ const uploadImage = async (req , res) => {
 
     if (!uploadResult) {
       return res.status(500).json({
-        message:"Error occured while uploading image",
+        message: "Error occured while uploading image",
       });
     }
 
     res.json({
-      message:""
-    })
+      message: "Image Uploaded Successfully",
+      url: uploadResult,
+    });
   } catch (error) {
-    
+    console.log(error);
+    res.status(500).json({ message: "Error Occured while uploading image" });
   }
-}
-export { registerUser, loginUser, logoutUser, refreshTokens };
+};
+export { registerUser, loginUser, logoutUser, refreshTokens, uploadImage };
