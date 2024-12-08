@@ -173,7 +173,7 @@ const uploadImage = async (req , res) => {
     }
 
     res.json({
-      
+      message:""
     })
   } catch (error) {
     
