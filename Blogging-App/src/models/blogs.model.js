@@ -1,20 +1,21 @@
-const blogSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:[true | "title is required"],
+const blogSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true | "title is required"],
     },
-    description:{
-        type:String,
-        required:[true | "description is required"],
+    description: {
+      type: String,
+      required: [true | "description is required"],
     },
-    postedBy:{
-        type:String,
-        required:[true | "author is required"],
+    postedBy: {
+      type: String,
+      required: [true | "author is required"],
     },
-},
-{
-    timestamps: true
-}
+  },
+  {
+    timestamps: true,
+  }
 );
 
-export default mongoose.model("Blogs",blogSchema);
+export default mongoose.model("Blogs", blogSchema);
