@@ -12,6 +12,9 @@ const blogSchema = new mongoose.Schema({
         required:[true | "author is required"],
     },
 },
+{
+    timestamps: true
+}
 );
 
 export default mongoose.model("Blogs",blogSchema);
