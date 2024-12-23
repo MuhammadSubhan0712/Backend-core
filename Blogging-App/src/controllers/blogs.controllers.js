@@ -2,7 +2,7 @@ import Blogs from "../models/blogs.model.js";
 
 
 // To create a blog
-const addBlog = async (req , res) => {
+export const addBlog = async (req , res) => {
    const { title , description , postedby } = req.body;
 
    if (!title || !description || !postedby) {
@@ -21,4 +21,21 @@ const addBlog = async (req , res) => {
    });
 }
 
-export {addBlog}
+// To get all blogs
+export const getAllBlogs = async (req , res) => {
+    try {
+        const blog = await Blogs.find({});
+        res.status(200).json({
+            message: "All Blogs ==>",
+            blog,
+        });
+    } catch (error) {
+        res.status(400).json({message:"Error fetching all blogs", error});
+    }
+};
+
+// To get single blog
+// To delete single blog
+// To edit single blog
+
+
