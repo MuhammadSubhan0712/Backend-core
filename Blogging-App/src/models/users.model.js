@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,16 +8,16 @@ const userSchema = new mongoose.Schema(
     },
     fullname: {
       type: String,
-      required: [true , "full name is required"],
+      required: [true, "full name is required"],
     },
     email: {
       type: String,
-      required: [true , "email is required" ,],
-      unique:true
+      required: [true, "email is required"],
+      unique: true,
     },
     password: {
       type: String,
-      required: [true , "password is required"],
+      required: [true, "password is required"],
     },
   },
   {
