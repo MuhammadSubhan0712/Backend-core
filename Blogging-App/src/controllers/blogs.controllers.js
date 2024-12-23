@@ -63,7 +63,7 @@ export const getSingleBlog = async (req, res) => {
 };
 
 // To delete single blog
-export const deleteBlog = async (req, res) => {
+export const deleteSingleBlog = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -89,3 +89,33 @@ export const deleteBlog = async (req, res) => {
 };
 
 // To edit single blog
+export const editSingleBlog = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+
+  try {
+    const editblog = await Blogs.findByIdAndUpdate(
+      id,
+      { title, description, postedby },
+      { new: true }
+    );
+    if (!title || !description || !postedby) {
+      res.status(400).json({
+        message: "You must enter all fields",
+      });
+      return;
+    }
+    res.status(200).json({
+      message: "Blog edited Successfully",
+      blog: editblog,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error editing blog ==>",
+      error,
+    });
+  }
+};
