@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Blogs from "../models/blogs.model.js";
 
 // To create a blog
@@ -60,5 +61,31 @@ export const getSingleBlog = async (req, res) => {
     });
   }
 };
+
 // To delete single blog
+export const deleteBlog = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+  try {
+    const deleteblog = await Blogs.findByIdAndDelete(id);
+    if (!deleteblog) {
+      res.status(400).json({
+        message: "No blog found",
+      });
+      return;
+    }
+    res.status(200).json({
+      message: "Blog deleted Successfully",
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error deleting blog ==>",
+      error,
+    });
+  }
+};
+
 // To edit single blog
