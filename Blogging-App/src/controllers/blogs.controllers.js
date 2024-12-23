@@ -20,3 +20,5 @@ const addBlog = async (req , res) => {
     message:"Blogs add successfully"
    });
 }
+
+export {addBlog}
