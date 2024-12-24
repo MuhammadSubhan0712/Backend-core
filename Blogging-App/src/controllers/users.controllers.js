@@ -72,5 +72,23 @@ const loginUser = async (req, res) => {
     res.status(400).json({
       message: "Incorrect Password",
     });
+    return;
   }
+
+  //   Cookies
+  res.cookie("refreshToken", refreshToken, { http: true, secure: false });
+  res.status(200).json({
+    message: "User LoggedIn Successfully",
+    accessToken: generateAccessToken(user),
+    refreshToken: generateRefreshToken(user),
+    data: user,
+  });
+
+  // To logout user
+  const logoutUser = async (req, res) => {
+    res.clearCookie("refreshToken");
+    res.json({
+      message: "User Logout Successfully",
+    });
+  };
 };
