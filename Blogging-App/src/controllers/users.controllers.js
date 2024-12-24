@@ -56,4 +56,13 @@ const loginUser = async (req, res) => {
     });
     return;
   }
+
+  const user = await Users.findOne({ email });
+
+  if (!user) {
+    res.status(404).json({
+      message: "!No user found!",
+    });
+    return;
+  }
 };
