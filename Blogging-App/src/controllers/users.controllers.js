@@ -34,4 +34,16 @@ const registerUser = async (req, res) => {
       message: "User Already Exist",
     });
   }
+  const createUser = await Users.create({
+    username,
+    fullname,
+    email,
+    password,
+  });
+  res.json({
+    message: "User Registered Successfully",
+    data: createUser,
+  });
 };
+
+
