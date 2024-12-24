@@ -18,7 +18,7 @@ const generateRefreshToken = (user) => {
 };
 
 // To register the user
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   const { username, fullname, email, password } = req.body;
 
   if (!username || !fullname || !email || !password) {
@@ -47,7 +47,7 @@ const registerUser = async (req, res) => {
 };
 
 //  To login User
-const loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -86,7 +86,7 @@ const loginUser = async (req, res) => {
 };
 
 // To logout user
-const logoutUser = async (req, res) => {
+export const logoutUser = async (req, res) => {
   res.clearCookie("refreshToken");
   res.json({
     message: "User Logout Successfully",
@@ -94,7 +94,7 @@ const logoutUser = async (req, res) => {
 };
 
 // To refresh token
-const refreshTokens = async (req, res) => {
+export const refreshTokens = async (req, res) => {
   const refreshToken = req.cookie.refreshToken || req.body.refreshToken;
   if (!refreshToken) {
     res.status(401).json({
