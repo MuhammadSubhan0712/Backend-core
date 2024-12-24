@@ -8,3 +8,11 @@ const generateAcessToken = (user) => {
     expiresIn: "6h",
   });
 };
+
+// To generate refresh token
+
+const generateRefreshToken = (user) => {
+  return jwt.sign({ email: user.email }, process.env.REFRESH_JWT_SECRET, {
+    expiresIn: "7d",
+  });
+};
