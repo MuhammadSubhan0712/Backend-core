@@ -113,4 +113,11 @@ const refreshTokens = async (req, res) => {
     });
     return;
   }
+
+  const generateToken = generateAcessToken(user);
+  res.json({
+    message: "Access Token Generated",
+    accessToken: generateToken,
+  });
+  res.json({ decodedToken });
 };
