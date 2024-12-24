@@ -46,4 +46,14 @@ const registerUser = async (req, res) => {
   });
 };
 
+//  To login User
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
 
+  if (!email || !password) {
+    res.status(400).json({
+      message: "You must enter email & password",
+    });
+    return;
+  }
+};
