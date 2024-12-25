@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
+import Stripe from "stripe";
 
+const stripe = new Stripe();
 const app = express();
 const port = 3000;
 app.use(express.json());
@@ -30,7 +32,7 @@ app.post("/api/v1/checkout", async (req, res) => {
     success_url: "http://localhost:5173/success",
     cancel_url: "http://localhost:5173/cancel",
   });
-  
+
   res.json({ message: "session completed", id: session.id });
 });
 
