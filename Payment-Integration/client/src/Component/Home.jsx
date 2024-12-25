@@ -54,7 +54,7 @@ const Home = () => {
         title: "Electric Toothbrush",
         price: 39.99,
         image:
-          "https://images.pexels.com/photos/8823972/pexels-photo-8823972.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://www.health.com/thmb/MMdfrhzTd8sC-XGIPOPgdwpqEOY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/HLT-Group-Electric-Toothbrushes-tamara-staples-0625-2000-ac77f54d9fdb4b22993318f78ca6137f.jpg",
       },
       {
         title: "Gaming Mouse",
@@ -65,31 +65,33 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-10">
-      <h2 className="text-4xl font-extrabold text-white text-center mb-10">
+     <div className="min-h-screen bg-gradient-to-r from-pink-100 via-green-200 to-cyan-100 p-10">
+      <h2 className="text-4xl font-extrabold text-gray-600 text-center mb-10">
         Ecommerce Store
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((item, id) => (
           <div
             key={id}
-            className="group relative p-5 bg-white shadow-2xl rounded-2xl hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] transition-shadow duration-300"
+            className="relative bg-white shadow-2xl rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300"
           >
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-yellow-400 to-red-500 opacity-70 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500"></div>
-            <div className="relative">
+            {/* Glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-tr from-yellow-400 to-red-500 blur-md opacity-60 hover:opacity-90 transition-all duration-500"></div>
+            {/* Content */}
+            <div className="relative z-10">
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-48 object-cover rounded-t-xl"
+                className="w-full h-60 object-cover rounded-t-2xl"
               />
-              <div className="p-4">
-                <h3 className="text-lg font-bold text-gray-800 group-hover:text-purple-600 transition-colors">
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-800 hover:text-red-900 transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 group-hover:text-black mt-2">
+                <p className="text-gray-600 hover:text-black font-bold mt-2">
                   ${item.price.toFixed(2)}
                 </p>
-                <button className="mt-4 block w-full py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold rounded-lg hover:from-purple-600 hover:to-indigo-500 transition-all">
+                <button className="mt-4 block w-full py-3 px-4 bg-gradient-to-r from-indigo-800 to-purple-800 text-white font-bold rounded-lg shadow-lg hover:from-purple-900 hover:to-indigo-900 transition-all">
                   Add to Cart
                 </button>
               </div>
