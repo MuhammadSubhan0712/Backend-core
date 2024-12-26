@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import User from "../models/users.model.js";
 
-const registerUser = async (req ,res ) => {
+export const registerUser = async (req ,res ) => {
     const {fullname , email , password} = req.body;
 
     if (!fullname || !email || !password) {
