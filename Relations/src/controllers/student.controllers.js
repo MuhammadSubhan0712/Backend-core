@@ -2,6 +2,7 @@ import Student from "../models/student.model.js";
 import Course from "../models/course.model.js";
 import mongoose from "mongoose";
 
+
 // To add Student
 export const addStudent = async (req, res) => {
   const { fullname, email, enrolledCourse } = req.body;
