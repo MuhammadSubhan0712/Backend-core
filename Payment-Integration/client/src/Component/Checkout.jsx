@@ -1,15 +1,9 @@
 import React from 'react'
-import { Flex, Text, Button } from "@radix-ui/themes";
 
-const Home = () => {
+const Checkout = () => {
   return (
-    <div>
-	<Flex direction="column" gap="2">
-			<Text>Hello from Radix Themes :)</Text>
-			<Button>Let's go</Button>
-		</Flex>
-  </div>
+    <div>Checkout</div>
   )
 }
 
-export default Home
+export default Checkout

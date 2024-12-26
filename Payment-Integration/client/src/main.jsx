@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import Home from "./Component/Home";
 import Success from "./Component/Success";
 import Cancel from "./Component/Cancel";
+import Checkout from "./Component/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "success",
         element: <Success />,
+      },
+      {
+        path:"checkout",
+        element:<Checkout/>
       },
       {
         path: "cancel",
