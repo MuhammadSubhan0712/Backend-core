@@ -11,4 +11,4 @@ router.post("/student" , addStudent);
 // To get Student
 router.get("/student/:id" , getStudent);
 
-export default router
+export default router;
