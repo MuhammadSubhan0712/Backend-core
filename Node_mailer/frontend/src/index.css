@@ -1,6 +1,12 @@
 
-body{
-  background-linear-gradient("from ");
+body {
+  background: linear-gradient(90deg, #f8a08a 0%, #e4ab7f 50%, #fdb7c0 100%);
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
