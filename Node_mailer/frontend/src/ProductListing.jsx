@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./index.css"
 const ProductListing = () => {
   const products = [
     {
@@ -108,6 +108,7 @@ const ProductListing = () => {
       description: "Immerse yourself in virtual reality.",
     },
   ];
+  
   return (
     <div className="row g-4">
       {products.map((product) => (
@@ -116,7 +117,7 @@ const ProductListing = () => {
             <div className="product-image-wrapper">
               <img
                 src={product.image}
-                className="card-img-top product-image"
+                className="h-80 card-img-top product-image"
                 alt={product.name}
               />
             </div>

@@ -1,18 +1,7 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  background-linear-gradient("from ");
 }
-
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   transform: perspective(1000px) rotateX(0deg);
@@ -24,14 +13,22 @@
 }
 
 .product-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
+  height: 200px; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+  border-radius: 8px; 
+  background-color: #f8f9fa;
 }
 
-.product-image {
-  transition: transform 0.4s ease;
-}
+  .product-image {
+    height: 100%; 
+    width: auto; 
+    object-fit: cover; 
+  }
+
 
 .product-card:hover .product-image {
   transform: scale(1.1);
