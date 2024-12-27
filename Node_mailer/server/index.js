@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./src/db/index.js";
+// import orderRoute from "./src/routes/order.route.js"
 dotenv.config();
 
 const app = express();
@@ -12,6 +13,9 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("HELLo Nodemailer");
 });
+
+// routes
+// app.use("/api/v1" , orderRoute);
 
 connectDB()
   .then(() => {
