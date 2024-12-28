@@ -5,7 +5,7 @@ import Order from "../models/order.model.js";
 export const placeOrder = async (req, res) => {
   const { userEmail, items, total } = req.body;
 
-  if (!userEmail || !items || !total) {
+  if (!userEmail ||!items ||!total) {
     res.status(400).json({
       message: "You must enter all fields i.e: email , items , quantity",
     });
@@ -30,16 +30,14 @@ export const placeOrder = async (req, res) => {
 
     await transporter.sendMail({
       from: '"Asfar the GrEaT 🥰" <ressie.hermann96@ethereal.email>', //Sender Address
-      to: "muhammmadsubhan0712@gmail.com",
+      to: userEmail,
       subject: "Order Confirmation",
       text: `Your order has been placed succcessfully. Quantity: ${total} \n Items: ${items}`,
-      html: "<abbr title=MSubhanKhan>MSK</abbr>", //html body
+      html: "<h2>MSK</h2>", //html body
     });
-
-    res
-      .status(200)
-      .json({ message: "Your order has been placed successfully" });
-  } catch (error) {
-    res.status(400).json({ message: "Error to placed order", error });
+    res.status(200).json({ message: "💯 Your order has been placed successfully 💯" });
+  } 
+  catch (error) {
+    res.status(400).json({ message: "❗️ Error to placed order ❗️", error });
   }
 };
