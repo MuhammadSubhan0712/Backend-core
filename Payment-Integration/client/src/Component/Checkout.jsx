@@ -34,15 +34,13 @@ const Checkout = () => {
     },
   ];
 
-  const [item , setItem] = useState([...cartItems]);
+  const [items , setItems] = useState([...cartItems]);
   
   const PayNow = async () => {
     const stripe = await loadStripe();
-  }
-
-
+  
   const response = await axios.post("http://localhost:3000/api/v1/checkout", {
-    products: item,
+    products: items,
   });
 
   console.log(response.data.id);
@@ -53,53 +51,91 @@ const Checkout = () => {
 };
 
   const MinusItem = (index) => {
-    item[index].quantity -=1;
-    setItem([...item]);
+    items[index].quantity -=1;
+    setItems([...items]);
   }
 
   const AddItem = (index) => {
-    item[index].quantity +=1;
-    setItem([...item]);
+    items[index].quantity +=1;
+    setItems([...items]);
   }
 
   const Delete = (index) => {
-    item.splice(index , 1);
-    setItem([...item]);
+    items.splice(index , 1);
+    setItems([...items]);
   }
   return(
   <>
-  <div>Checkout</div>
-  <div>
-    {item.map((item , index) => {
-      <div key={item.id}>
-        <div>
-          <img src={item.image} alt="items image" />
-        </div>
-      <div>
-        Title: {item.title}
-      </div>
-      <div>
-        <button onClick={() => MinusItem(index)}> ➖ </button>
-      </div>
-      <div>
-        Quantity: {item.quantity}
-      </div>
-      <button onClick={() => AddItem(index)}> ➕ </button>
+  <div className="min-h-screen bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6">
+      <h1 className="text-3xl font-bold text-center mb-8">Your Cart</h1>
 
-      <div>
-        Price: {item.price}$
-      </div>
-       
-       <button onClick={() => Delete(index)}>👉🏻🗑️</button>
-      </div>
-    })}
-    <div>
-      <button>
-      💸 Proceed to Pay 💵
-      </button>
-     
+      {items.length === 0 ? (
+        <div className="text-center text-gray-500">
+          <p>Your cart is empty.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item, index) => (
+            <div
+              key={item.id}
+              className="bg-white shadow-2xl transform transition-all hover:-translate-y-2 rounded-lg p-4"
+            >
+              {/* Product Image */}
+              <div className="relative overflow-hidden h-48 rounded-lg mb-4">
+                <img
+                  src={item.image}
+                  alt="Product"
+                  className="h-full w-full object-cover transform hover:scale-105 transition-all duration-300"
+                />
+              </div>
+
+              {/* Product Details */}
+              <h2 className="text-lg font-bold mb-2">{item.title}</h2>
+              <p className="text-gray-600 mb-4">Price: ${item.price}</p>
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => MinusItem(index)}
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-md shadow-md"
+                >
+                  ➖
+                </button>
+                <span className="font-medium text-gray-700">
+                  Quantity: {item.quantity}
+                </span>
+                <button
+                  onClick={() => AddItem(index)}
+                  className="bg-green-200 hover:bg-green-300 text-green-700 font-bold py-2 px-4 rounded-md shadow-md"
+                >
+                  ➕
+                </button>
+              </div>
+
+              {/* Delete Button */}
+              <div className="mt-4 flex justify-center items-center">
+                <button
+                  onClick={() => Delete(index)}
+                  className="bg-red-200 hover:bg-red-300 text-red-700 font-bold py-2 px-4 rounded-md shadow-md flex items-center"
+                >
+                  👉🏻🗑️ Remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Checkout Button */}
+      {items.length > 0 && (
+        <div className="mt-8 text-center">
+          <button
+            onClick={PayNow}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
+          >
+            💸 Proceed to Pay 💵
+          </button>
+        </div>
+      )}
     </div>
-  </div>
   </>
   );
 };

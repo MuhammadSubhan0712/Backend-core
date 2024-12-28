@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Checkout />,
       },
       {
         path: "success",
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path:"checkout",
-        element:<Checkout/>
+        element:<Home/>
       },
       {
         path: "cancel",
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <h2>404 | Not Found </h2>,
+        element: <h2 className="flex mt-5 p-5 bg-red-600 text-white justify-center items-center border-4 border-yellow-400 rounded-xl">404 | Not Found </h2>,
       },
     ],
   },
