@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <h2 className="flex mt-5 p-5 bg-red-600 text-white justify-center items-center border-4 border-yellow-400 rounded-xl">404 | Not Found </h2>,
+        element: <h2 className="my-20  p-3 w-90 flex justify-center items-center bg-red-600 text-pink-100 text-2xl font-bold border-4 border-yellow-400 rounded-xl">404 | Not Found </h2>,
       },
     ],
   },

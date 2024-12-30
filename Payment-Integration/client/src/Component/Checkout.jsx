@@ -32,6 +32,12 @@ const Checkout = () => {
       image:
         "https://images.pexels.com/photos/28884413/pexels-photo-28884413/free-photo-of-modern-home-office-tech-setup-with-gadgets.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
+    {
+      title: "Fitness Tracker Watch",
+      price: 49.99,
+      quantity: 2,
+      image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBgArmMNk2NC39luJQCo-8OUgkEPQ2wTeXcA&s",
+    },
   ];
 
   const [items , setItems] = useState([...cartItems]);
@@ -67,7 +73,7 @@ const Checkout = () => {
   return(
   <>
   <div className="min-h-screen bg-gradient-to-r from-blue-50 via-white to-blue-50 p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">Your Cart</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">🛒🛍️✨Your Cart🛒🛍️✨</h1>
 
       {items.length === 0 ? (
         <div className="text-center text-gray-500">
