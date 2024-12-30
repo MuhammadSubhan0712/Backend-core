@@ -12,17 +12,17 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("HeLlO rElATi0n");
+  res.send("HeLlO Pagination");
 });
 
 // routes
-app.use("api/v1", courseRoute);
-app.use("api/v1", studentRoute);
+app.use("/api/v1", courseRoute);
+app.use("/api/v1", studentRoute);
 
 connectDB()
   .then(() => {
     app.listen(process.env.PORT, () => {
-      console.log(`⚙️ Server is running at the port ${process.env.PORT}`);
+      console.log(`⚙️  Server is running at the port ${process.env.PORT}`);
     });
   })
   .catch((error) => {
