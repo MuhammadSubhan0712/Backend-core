@@ -9,5 +9,4 @@ router.post("/course", addCourse);
 // To get course
 router.get("/courses", getCourse);
 
-
 export default router;
