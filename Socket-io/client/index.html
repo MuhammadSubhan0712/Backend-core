@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Socket I/O</title>
-</head>
-<body>
-    
-
-    <script type="module" src="app.js">
-
-    </script>
-</body>
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1
+          style="
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: darkgreen;
+          ">
+          HELLO SOCKET I/O
+        </h1>
+      </div>
+      <div style="margin-top: 20px; display: flex; justify-content: center">
+        <h2 style="color: blue">🤝 Our Community 🗪</h2>
+      </div>
+      <div style="margin-top: 10px; display: flex; justify-content: center">
+        <form style="padding: 10px" id="form">
+          <input
+            style="padding: 8px; border-radius: 10px"
+            required
+            type="text"
+            id="input"
+            placeholder="enter text" />
+          <div
+            style="
+              margin-top: 15px;
+              display: flex;
+              justify-content: space-between;
+            ">
+            <button
+              style="
+                padding: 8px;
+                background-color: blue;
+                color: #fff;
+                font-size: medium;
+                border-radius: 10px;
+              "
+              type="submit">
+              send message
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <ul></ul>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
 </html>
