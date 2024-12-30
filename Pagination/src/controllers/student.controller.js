@@ -29,7 +29,6 @@ export const addStudent = async (req, res) => {
 };
 
 // To get Student
-
 export const getStudent = async (req, res) => {
   const { id } = req.params;
 
@@ -51,3 +50,9 @@ export const getStudent = async (req, res) => {
     student,
   });
 };
+
+// To get All Students
+const getAllStudents = async (req , res) => {
+
+  const 
+}
