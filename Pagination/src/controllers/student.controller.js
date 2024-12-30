@@ -53,6 +53,30 @@ export const getStudent = async (req, res) => {
 
 // To get All Students
 const getAllStudents = async (req , res) => {
+  const page = req.query.page || 1 ; 
+  const limit = req.query.limit || 3 ;
 
-  const 
-}
+  const skip = (page - 1) * limit;
+
+  const students = await Student.find({}).skip(skip).limit(limit);
+  res.status(200).json({
+    message:"All students ==>",
+    data: students,
+    length:students.length,
+  });
+};
+
+// To delete student
+export const deleteStudent = async ( req , res ) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.json({message:" Invalid Id "});
+    return;
+  }
+  Student.splice( id , 1 );
+  res.status(200).json({
+    message: "Student deleted successfully",
+    data:Student,
+  });
+};
+
