@@ -96,7 +96,7 @@ const logoutUser = async (req, res) => {
 
 
 // To refresh token
-const refreshTokens = async (req, res) => {
+const refreshToken = async (req, res) => {
   const refreshToken = req.cookies.refreshToken || req.body.refreshToken;
   if (!refreshToken) {
     res.status(401).json({
@@ -104,7 +104,9 @@ const refreshTokens = async (req, res) => {
     });
     return;
   }
-  const decodedToken = jwt.verify(refreshToken, process.env.REFRESH_JWT_SECRET);
+  
+  try {
+    const decodedToken = jwt.verify(refreshToken, process.env.REFRESH_JWT_SECRET);
 
   const user = await User.findOne({ email: decodedToken.email });
 
@@ -121,6 +123,11 @@ const refreshTokens = async (req, res) => {
     accessToken: generateToken,
   });
   res.json({ decodedToken });
-};
+}
+  catch (error) {
+    res.status(500).json({message:"Internal Server erorr", error:error.message});
+    console.log("Error generate access token" ,error);
+  }
+}
 
-export { registerUser, loginUser, logoutUser, refreshTokens };
+export { registerUser, loginUser, logoutUser, refreshToken };

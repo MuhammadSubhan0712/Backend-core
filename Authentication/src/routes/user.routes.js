@@ -4,7 +4,7 @@ import {
   registerUser,
   loginUser,
   logoutUser,
-  refreshTokens,
+  refreshToken,
 } from "../controllers/user.controllers.js";
 
 const router = express.Router();
@@ -22,6 +22,6 @@ router.post("/logout", logoutUser);
 
 // To refresh token
 
-router.post("/refreshtoken", refreshTokens);
+router.post("/refreshtoken", refreshToken);
 
 export default router;

@@ -11,6 +11,10 @@ export const placeOrder = async (req, res) => {
     });
     return;
   }
+  // const existingOrder = await Order.findOne({ userEmail });
+  //   if (existingOrder) {
+  //     return res.status(400).json({ message: "🔄 User email already exists in orders. 💥" });
+  //   }
 
   try {
     const order = await Order.create({ userEmail, items, total });
@@ -23,12 +27,12 @@ export const placeOrder = async (req, res) => {
       secure: false,
 
       auth: {
-        user: "ressie.hermann96@ethereal.email",
+        user: "muhammadsubhan0712@gmail.com",
         pass: "qAEhKNqtUVUgjW1hj8",
       },
     });
-
-    await transporter.sendMail({
+    
+    const info = await transporter.sendMail({
       from: '"Asfar the GrEaT 🥰" <ressie.hermann96@ethereal.email>', //Sender Address
       to: userEmail,
       subject: "Order Confirmation",
@@ -36,6 +40,8 @@ export const placeOrder = async (req, res) => {
       html: "<h2>MSK</h2>", //html body
     });
     res.status(200).json({ message: "💯 Your order has been placed successfully 💯" });
+    console.log("Message sent: %s" .info.messageId);
+    
   } 
   catch (error) {
     res.status(400).json({ message: "❗️ Error to placed order ❗️", error });

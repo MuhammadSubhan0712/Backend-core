@@ -21,10 +21,9 @@ app.get("/", (req, res) => {
 
 const encryptP = "$2b$10$s5q2yY18eQE10n59CPnWUO48YGpweG09ce5V/uXKgZlJzS2Cp.Jr6";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hYmR1bGxhaDIwMzdAZ21haWwuY29tIiwiaWF0IjoxNzMyODU3NTM4fQ.QqjHvu41SHVI4wiCBwZDskXRLQE8LkJiNTNZBdSqOjI";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hYmR1bGxhaDIwMzdAZ21haWwuY29tIiwiaWF0IjoxNzMyODU3NTM4fQ.QqjHvu41SHVI4wiCBwZDskXRLQE8LkJiNTNZBdSqOjI";
 
-app.use("api/v1" , router);
+app.use("/api/v1",router);
 
 connectDB()
   .then(() => {
