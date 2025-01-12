@@ -4,6 +4,15 @@ import User from "../models/users.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+// to generate Access Token
+const generateAcessToken = (user) => {
+  return jwt.sign({ email: user.email }, process.env.ACCESS_JWT_SECRET, {
+    expiresIn: "6h",
+  });
+};
+
+// to generate refresh Token
+
 // To register User
 export const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
@@ -55,13 +64,12 @@ const loginUser = async (req, res) => {
     return;
   }
 
-  const isPasswordValid = await bcrypt.compare(password , user.password);
+  const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
     res.status(401).json({
-        message:"Incorrect Password",
+      message: "Incorrect Password",
     });
     return;
   }
-  
 };
