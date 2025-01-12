@@ -12,6 +12,11 @@ const generateAcessToken = (user) => {
 };
 
 // to generate refresh Token
+const generateRefreshToken = (user) => {
+  return jwt.sign({ email: user.email }, process.env.REFRESH_JWT_SECRET, {
+    expiresIn: "7d",
+  });
+};
 
 // To register User
 export const registerUser = async (req, res) => {
@@ -55,21 +60,46 @@ const loginUser = async (req, res) => {
     });
     return;
   }
-  const user = await User.findOne({ email });
 
-  if (!user) {
-    res.status(401).json({
-      message: "!No User found!",
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      res.status(401).json({
+        message: "!No User found!",
+      });
+      return;
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      res.status(401).json({
+        message: "Incorrect Password",
+      });
+      return;
+    }
+    // Cookies
+    res.cookie("refreshToken" , generateRefreshToken, {http:true , secure:false});
+    res.status(200).json({
+        message:"User LoggedIn Successfully",
+        accessToken: generateAcessToken(user),
+        refreshToken: generateRefreshToken(user),
+        data:user,
     });
-    return;
-  }
 
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordValid) {
-    res.status(401).json({
-      message: "Incorrect Password",
-    });
-    return;
+  } catch (error) {
+    console.log("Error login user", error);
+    res.status(400).json({ message: "Error login user", error });
   }
 };
+
+
+// To logout User
+const logoutUser = async (req , res) => {
+    res.clearCookie("refreshToken");
+    res.json({
+        message:"User logout Successfully",
+    });
+};
+
