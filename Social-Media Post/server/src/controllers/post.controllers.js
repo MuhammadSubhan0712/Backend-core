@@ -1,4 +1,6 @@
 import Post from "../models/post.model.js";
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
 
 export const createPost = async (req, res) => {
   const { userId, title, content } = req.body;
@@ -21,3 +23,11 @@ export const createPost = async (req, res) => {
     });
   }
 };
+
+// cloudinary configuration
+cloudinary.config({
+  cloud_name : process.env.CLOUD_NAME,
+  api_key : process.env.API_KEY,
+  api_secret : process.env.API_SECRET,
+});
+
