@@ -19,7 +19,7 @@ const generateRefreshToken = (user) => {
 };
 
 // To register User
-export const registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -139,3 +139,5 @@ const refreshToken = async (req, res) => {
     console.log("Error generating access token", error);
   }
 };
+
+export { registerUser, loginUser, logoutUser, refreshToken };
