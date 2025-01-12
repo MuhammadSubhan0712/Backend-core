@@ -80,26 +80,62 @@ const loginUser = async (req, res) => {
       return;
     }
     // Cookies
-    res.cookie("refreshToken" , generateRefreshToken, {http:true , secure:false});
-    res.status(200).json({
-        message:"User LoggedIn Successfully",
-        accessToken: generateAcessToken(user),
-        refreshToken: generateRefreshToken(user),
-        data:user,
+    res.cookie("refreshToken", generateRefreshToken, {
+      http: true,
+      secure: false,
     });
-
+    res.status(200).json({
+      message: "User LoggedIn Successfully",
+      accessToken: generateAcessToken(user),
+      refreshToken: generateRefreshToken(user),
+      data: user,
+    });
   } catch (error) {
     console.log("Error login user", error);
     res.status(400).json({ message: "Error login user", error });
   }
 };
 
-
 // To logout User
-const logoutUser = async (req , res) => {
-    res.clearCookie("refreshToken");
-    res.json({
-        message:"User logout Successfully",
-    });
+const logoutUser = async (req, res) => {
+  res.clearCookie("refreshToken");
+  res.json({
+    message: "User logout Successfully",
+  });
 };
 
+// To refresh Token
+const refreshToken = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken || req.body.refreshToken;
+  if (!refreshToken) {
+    res.status(401).json({
+      message: "!No refresh Token!",
+    });
+    return;
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_JWT_SECRET
+    );
+    const user = await User.findOne({ email: decodedToken.email });
+
+    if (!user) {
+      res.status(404).json({
+        message: "Invalid Token",
+      });
+      return;
+    }
+
+    const generateToken = generateAcessToken(user);
+    res.json({
+      message: "Access Token generated successfully",
+      accessToken: generateToken,
+    });
+    res.json({ decodedToken });
+  } catch (error) {
+    res.json({ message: "Error generating access token" }, error);
+    console.log("Error generating access token", error);
+  }
+};
