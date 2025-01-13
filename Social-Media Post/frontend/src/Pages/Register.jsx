@@ -8,11 +8,19 @@ const Register = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#000000] text-[#00FF00]">
+          {/* Heading */}
+
         <h1 className="text-3xl font-bold mb-6">Register</h1>
+         
+         {/* Form Container */}
         <form className="w-full max-w-sm space-y-4">
+
+             {/* Username Input */}
           <div className="mt-2 ">
             <Input type="text" placeholder="Username" className="bg-zinc-600" />
           </div>
+
+          
           <div className="mt-2 ">
             <Input type="email" placeholder="Email" className="bg-zinc-600" />
           </div>
