@@ -1,60 +1,70 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#000000] text-[#00FF00]">
-                       {/* Heading */}
-        <h1 className="text-3xl font-bold mb-6">Register</h1>
-         
-                    {/* Form Container */}
-        <form className="w-full max-w-sm space-y-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#333333] text-[#00FF00]">
+      {/* Heading */}
+      <h1 className="text-4xl font-extrabold mb-8 text-center text-yellow-400 drop-shadow-md">
+      Register <span className="text-xl">to get social</span>
+      </h1>
 
-                    {/* Username Input */}
-          <div className="mt-2 ">
-            <Input type="text" placeholder="Username" className="bg-zinc-600" />
-          </div>
-
-                    {/* Email Input */}
-          <div className="mt-2 ">
-            <Input type="email" placeholder="Email" className="bg-zinc-600" />
-          </div>
-
-                   {/* Password Input */}
-          <div className="mt-2 ">
+      {/* Form Container */}
+      <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
+        <form className="space-y-6">
+          {/* Username Input */}
+          <div>
             <Input
-              type="password"
-              placeholder="***********"
-              className="bg-zinc-600"
+              type="text"
+              placeholder="Username"
+              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
             />
           </div>
 
-                  {/* Sign-Up Button */}
-          <Button className="bg-[#175332ec] text-white hover:scale-105 hover:bg-green-300 transition-transform hover:text-zinc-600 w-full">
+          {/* Email Input */}
+          <div>
+            <Input
+              type="email"
+              placeholder="Email"
+              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
+            />
+          </div>
+
+          {/* Password Input */}
+          <div>
+            <Input
+              type="password"
+              placeholder="Password"
+              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
+            />
+          </div>
+
+          {/* Sign-Up Button */}
+          <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:scale-105 hover:shadow-lg transition-transform">
             Sign Up
           </Button>
         </form>
 
-                   {/* Login Link */}
-        <p className="mt-4">
-          Already have an account?{"  "}
-          <Link to="/login" className="underline hover:text-white">
+        {/* Login Link */}
+        <p className="mt-6 text-center text-sm text-gray-400">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="underline text-yellow-400 hover:text-green-400 transition-colors"
+          >
             Login
           </Link>
         </p>
-        {/* Decoration stuff */}
-     <div className="mt-8 flex space-x-4">
-      <span className="h-4 w-4 bg-green-400 rounded-full animate-ping"></span>
-      <span className="h-4 w-4 bg-yellow-400 rounded-full animate-ping delay-75"></span>
-      <span className="h-4 w-4 bg-green-600 rounded-full animate-ping delay-150"></span>
-      </div>
       </div>
 
-    </>
+      {/* Decorative Stuff */}
+      <div className="mt-8 flex space-x-4">
+        <span className="h-4 w-4 bg-green-400 rounded-full animate-pulse"></span>
+        <span className="h-4 w-4 bg-yellow-400 rounded-full animate-pulse delay-75"></span>
+        <span className="h-4 w-4 bg-green-600 rounded-full animate-pulse delay-150"></span>
+      </div>
+    </div>
   );
 };
 
