@@ -3,14 +3,14 @@ import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
 export const createPost = async (req, res) => {
-  const { userId, title, content } = req.body;
+  const { userId, title, image } = req.body;
 
-  if (!userId || !title || !content) {
+  if (!userId || !title || !image) {
     res.status(400).json({ message: "All fields are required" });
     return;
   }
   try {
-    const newPost = await Post.create({ userId, title, content });
+    const newPost = await Post.create({ userId, title, image });
 
     res.status(200).json({
       message: "Post created Sucessfully",
