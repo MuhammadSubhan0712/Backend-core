@@ -9,21 +9,11 @@ const Login = () => {
       <h1 className="text-4xl font-extrabold mb-3 text-center text-yellow-400 drop-shadow-md">
         Login
       </h1>
-      <span className="text-xl font-mono text-orange-600">
-        ✨ to get social 🤳
-      </span>
+
       {/* Form Container */}
       <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
         <form className="space-y-6">
-          {/* Username Input */}
-          <div>
-            <Input
-              type="text"
-              placeholder="Username"
-              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
-            />
-          </div>
-
+    
           {/* Email Input */}
           <div>
             <Input
