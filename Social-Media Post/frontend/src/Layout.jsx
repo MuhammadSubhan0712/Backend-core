@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <>
     <div><Outlet/></div>
-    <div><App/></div>
+    {/* <div><App/></div> */}
     </>
   )
 }

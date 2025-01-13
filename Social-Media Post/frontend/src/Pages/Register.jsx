@@ -46,14 +46,14 @@ const Register = () => {
             Login
           </Link>
         </p>
-      </div>
-
-      <div className="mt-8 flex space-x-4">
+        {/* Decoration stuff */}
+     <div className="mt-8 flex space-x-4">
       <span className="h-4 w-4 bg-green-400 rounded-full animate-pulse"></span>
       <span className="h-4 w-4 bg-yellow-400 rounded-full animate-pulse delay-75"></span>
       <span className="h-4 w-4 bg-green-600 rounded-full animate-pulse delay-150"></span>
-
       </div>
+      </div>
+
     </>
   );
 };
