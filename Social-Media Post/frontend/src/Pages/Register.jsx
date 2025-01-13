@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#333333] text-[#00FF00]">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#333333]">
       {/* Heading */}
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-yellow-400 drop-shadow-md">
-      Register <span className="text-xl">to get social</span>
+      <h1 className="text-4xl font-extrabold mb-3 text-center text-yellow-400 drop-shadow-md">
+      Register
       </h1>
-
+      <span className="text-xl font-mono text-orange-600">✨ to get social 🤳</span>
       {/* Form Container */}
       <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
         <form className="space-y-6">
