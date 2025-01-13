@@ -47,7 +47,13 @@ const Register = () => {
           </Link>
         </p>
       </div>
-      
+
+      <div className="mt-8 flex space-x-4">
+      <span className="h-4 w-4 bg-green-400 rounded-full animate-pulse"></span>
+
+
+
+      </div>
     </>
   );
 };
