@@ -32,7 +32,7 @@ const Posting = () => {
             />
           </div>
 
-          {/* Sign-Up Button */}
+          {/* Post Button */}
           <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:scale-105 hover:shadow-lg transition-transform">
           Post
           </Button>
