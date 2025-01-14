@@ -13,7 +13,7 @@ const Posting = () => {
       </h1>
 
       {/* Form Container */}
-      <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
+      <div className="bg-[#121212] p-8 rounded-3xl shadow-2xl w-full max-w-md transform hover:scale-105 transition-transform">
         <form className="space-y-6">
     
           {/* Post Title Input */}
