@@ -32,10 +32,17 @@ const Posting = () => {
             />
           </div>
 
-          
+          {/* Post Image Input */}
+          <div>
+            <Input
+              type="file"
+              className="w-full bg-zinc-800 text-white placeholder-gray-400 focus:ring-4 focus:ring-yellow-400 focus:outline-none rounded-lg p-4 shadow-lg"
+            />
+          </div>
+
           {/* Post Button */}
-          <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:scale-105 hover:shadow-lg transition-transform">
-          Post
+          <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-4 rounded-lg shadow-xl hover:scale-110 hover:shadow-2xl transition-transform">
+            Post
           </Button>
         </form>
       </div>
