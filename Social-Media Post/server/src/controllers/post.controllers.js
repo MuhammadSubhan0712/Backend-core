@@ -10,8 +10,7 @@ export const createPost = async (req, res) => {
     return;
   }
   try {
-    const newPost = await Post.create({ userId, title, image });
-
+    const newPost = await Post.create({ userId, title, image:req.file.url });
     res.status(200).json({
       message: "Post created Sucessfully",
       post: newPost,
@@ -30,4 +29,49 @@ cloudinary.config({
   api_key : process.env.API_KEY,
   api_secret : process.env.API_SECRET,
 });
+// To upload image
+const uploadImageToCloudinary = async (localpath) => {
+  try {
+    const uploadResult = await cloudinary.uploader.upload(localpath, {
+      resource_type: "auto",
+    });
+    if (fs.existsSync(localpath)) {
+      fs.unlinkSync(localpath);
+    }
+    return uploadResult.url;
+  } catch (error) {
+    console.log("Error Occured", error);
+    res.status(400).json({
+      message: "Error Occured ==>",
+      error,
+    });
+    if (fs.existsSync(localpath)) {
+      fs.unlinkSync(localpath);
+    }
+    return null;
+  }
+};
+export const uploadImage = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({
+      message: "No image file uploaded",
+    });
+  }
 
+  try {
+    const uploadResult = await uploadImageToCloudinary(req.file.path);
+
+    if (!uploadResult) {
+      return res.status(500).json({
+        message: "Error occured while uploading image",
+      });
+    }
+    res.json({
+      message: "Image Uploaded Successfully",
+      url: uploadResult,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error Occured while uploading image" });
+  }
+};
