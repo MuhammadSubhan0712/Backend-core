@@ -34,7 +34,7 @@ const Login = () => {
 
           {/* Sign-Up Button */}
           <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:scale-105 hover:shadow-lg transition-transform">
-            Sign Up
+          Login
           </Button>
         </form>
 
@@ -44,16 +44,9 @@ const Login = () => {
           <Link
             to="/register"
             className="underline text-yellow-400 hover:text-green-400 transition-colors">
-            SignUp
+            Sign Up
           </Link>
         </p>
-      </div>
-
-      {/* Decorative Stuff */}
-      <div className="mt-8 flex space-x-4">
-        <span className="h-4 w-4 bg-green-400 rounded-full animate-pulse"></span>
-        <span className="h-4 w-4 bg-yellow-400 rounded-full animate-pulse delay-75"></span>
-        <span className="h-4 w-4 bg-green-600 rounded-full animate-pulse delay-150"></span>
       </div>
     </div>
   );

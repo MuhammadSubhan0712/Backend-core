@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: (
-          <h1 className="p-3 mt-5 text-xl flex justify-center items-center text-red-600 font-semibold">
+          <h1 className="p-3 mt-5 text-3xl flex justify-center items-center text-red-600 font-semibold">
             {" "}
             404 | Not Found{" "}
           </h1>

@@ -6,7 +6,7 @@ const Register = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#333333]">
       {/* Heading */}
-      <h1 className="text-4xl font-extrabold mb-3 text-center text-yellow-400 drop-shadow-md">
+      <h1 className="text-4xl font-bold mb-3 text-center text-yellow-400 drop-shadow-md">
       Register
       </h1>
       <span className="text-xl font-mono text-orange-600">✨ to get social 🤳</span>
