@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
-import Posts from "./Pages/Posts.jsx";
+import Posting from "./Pages/Posts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/post",
-        element: <Posts />,
+        element: <Posting />,
       },
       {
         path: "*",
