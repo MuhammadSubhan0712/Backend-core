@@ -2,6 +2,13 @@ import Post from "../models/post.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
+// cloudinary configuration
+cloudinary.config({
+  cloud_name : process.env.CLOUD_NAME,
+  api_key : process.env.API_KEY,
+  api_secret : process.env.API_SECRET,
+});
+
 export const createPost = async (req, res) => {
   const { userId, title, image } = req.body;
 
@@ -10,7 +17,7 @@ export const createPost = async (req, res) => {
     return;
   }
   try {
-    const newPost = await Post.create({ userId, title, image:req.file.url });
+    const newPost = await Post.create({ userId, title, image:uploadResult.url });
     res.status(200).json({
       message: "Post created Sucessfully",
       post: newPost,
@@ -23,12 +30,6 @@ export const createPost = async (req, res) => {
   }
 };
 
-// cloudinary configuration
-cloudinary.config({
-  cloud_name : process.env.CLOUD_NAME,
-  api_key : process.env.API_KEY,
-  api_secret : process.env.API_SECRET,
-});
 // To upload image
 const uploadImageToCloudinary = async (localpath) => {
   try {

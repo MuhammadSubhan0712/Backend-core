@@ -37,10 +37,17 @@ const registerUser = async (req, res) => {
       });
     }
 
-    const Newuser = await User.create({ fullname, email, password });
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const Newuser = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
     res.status(200).json({
       message: "User created Successfully",
     });
+    return;
   } catch (error) {
     res.status(400).json({
       message: "Error creating user",
@@ -80,7 +87,7 @@ const loginUser = async (req, res) => {
     }
     // Cookies
     res.cookie("refreshToken", generateRefreshToken, {
-      http: true,
+      httpOnly: true,
       secure: false,
     });
     res.status(200).json({
@@ -89,6 +96,7 @@ const loginUser = async (req, res) => {
       refreshToken: generateRefreshToken(user),
       data: user,
     });
+    return;
   } catch (error) {
     console.log("Error login user", error);
     res.status(400).json({ message: "Error login user", error });
@@ -101,6 +109,7 @@ const logoutUser = async (req, res) => {
   res.json({
     message: "User logout Successfully",
   });
+  return;
 };
 
 // To refresh Token
