@@ -38,22 +38,22 @@ const Register = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-cyberpunk-dark font-orbitron">
       {/* Heading */}
       <div className="text-center mb-8">
- <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink">
-        JOIN THE NETWORK
-      </h1>
-      <p className="text-cyberpunk-cyan">Create your digital identity</p>
+        <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink">
+          JOIN THE NETWORK
+        </h1>
+        <p className="text-cyberpunk-cyan">Create your digital identity</p>
       </div>
-     
-    
+
       {/* Form Container */}
-      <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
+      <div className="bg-cyberpunk-card p-8 rounded-xl border border-cyberpunk-cyan/20 w-full max-w-md">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Username Input */}
           <div>
             <Input
               type="text"
               placeholder="Username"
-              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
+              className="w-full bg-[#222] text-white placeholder-gray-400 border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
+              onChange={handleChange}
               required
             />
           </div>
@@ -64,7 +64,7 @@ const Register = () => {
               type="email"
               value={formData.email}
               placeholder="Email"
-              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
+              className="w-full bg-[#222] text-white placeholder-gray-400 border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
               onChange={handleChange}
               required
             />
@@ -76,14 +76,17 @@ const Register = () => {
               type="password"
               value={formData.password}
               placeholder="Password"
-              className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
+              className="w-full bg-[#222] text-white placeholder-gray-400 border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
               onChange={handleChange}
             />
           </div>
 
           {/* Sign-Up Button */}
-          <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:scale-105 hover:shadow-lg transition-transform">
-            Sign Up
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink text-black font-bold hover:opacity-90 h-12">
+            {loading ? "CREATING..." : "SIGN UP"}
           </Button>
         </form>
 
@@ -96,13 +99,6 @@ const Register = () => {
             Login
           </Link>
         </p>
-      </div>
-
-      {/* Decorative Stuff */}
-      <div className="mt-8 flex space-x-4">
-        <span className="h-4 w-4 bg-green-400 rounded-full animate-pulse"></span>
-        <span className="h-4 w-4 bg-yellow-400 rounded-full animate-pulse delay-75"></span>
-        <span className="h-4 w-4 bg-green-600 rounded-full animate-pulse delay-150"></span>
       </div>
     </div>
   );
