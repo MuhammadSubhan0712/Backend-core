@@ -114,7 +114,7 @@ const Posting = () => {
           </form>
         </div>
 
-        {/* Post Feed */}
+        {/* Post Feed
         <div className="space-y-6">
           {posts.map((post) => (
             <div
@@ -153,7 +153,7 @@ const Posting = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

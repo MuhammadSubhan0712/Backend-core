@@ -38,49 +38,44 @@ const Register = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-cyberpunk-dark font-orbitron">
       {/* Heading */}
       <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink">
+        <h1 className="text-5xl  font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink">
           JOIN THE NETWORK
         </h1>
-        <p className="text-cyberpunk-cyan">Create your digital identity</p>
+        <p className="text-2xl text-cyberpunk-cyan">Create your digital identity</p>
       </div>
 
       {/* Form Container */}
       <div className="bg-cyberpunk-card p-8 rounded-xl border border-cyberpunk-cyan/20 w-full max-w-md">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Username Input */}
-          <div>
-            <Input
-              type="text"
-              placeholder="Username"
-              className="w-full bg-[#222] text-white placeholder-gray-400 border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
-              onChange={handleChange}
-              required
-            />
-          </div>
+         <Input
+            type="text"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full bg-[#222] text-white border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
+            required
+          />
 
           {/* Email Input */}
-          <div>
             <Input
-              type="email"
-              value={formData.email}
-              placeholder="Email"
-              className="w-full bg-[#222] text-white placeholder-gray-400 border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
-              onChange={handleChange}
-              required
-            />
-          </div>
-
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full bg-[#222] text-white border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
+            required
+          />
           {/* Password Input */}
-          <div>
-            <Input
+           <Input
               type="password"
               value={formData.password}
               placeholder="Password"
               className="w-full bg-[#222] text-white placeholder-gray-400 border border-cyberpunk-cyan/30 focus:border-cyberpunk-pink"
               onChange={handleChange}
+              required
             />
-          </div>
-
+  
           {/* Sign-Up Button */}
           <Button
             type="submit"
