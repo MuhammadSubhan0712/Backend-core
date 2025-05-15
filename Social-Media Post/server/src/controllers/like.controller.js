@@ -7,12 +7,11 @@ export const likePost = async (req, res) => {
     const likeExistence = await Like.findOne({ userId, postId });
 
     if (likeExistence) {
-      res.status(400).json({ message: "Post already like" });
-
       await Like.deleteOne({ userId, postId });
-      res.status(200).json({ message: "Now unliked successfully" });
+      res.status(200).json({ message: "Post unliked successfully" });
       return;
-    } else {
+    } 
+    else {
       const like = new Like({ userId, postId });
       await like.save();
       res.status(200).json({ message: "Post liked successfully" });

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const authenticateUser = async (req, res) => {
+const authenticateUser = async (req, res, next) => {
   const token = req.headers["authorization"];
   if (!token) {
     res.status(404).json({

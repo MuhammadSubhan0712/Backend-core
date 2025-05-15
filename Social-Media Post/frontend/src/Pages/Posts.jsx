@@ -2,8 +2,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import "../index.css";
+import { useEffect, useState } from "react";
 
 const Posting = () => {
+
+  const [posts, setPosts] = useState([]);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    axios.get("api/")
+  },[])
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#333333] text-white overflow-hidden">
       
@@ -29,6 +38,7 @@ const Posting = () => {
             <Input
               type="file"
               className="w-full bg-zinc-800 text-white placeholder-gray-400 focus:ring-4 focus:ring-yellow-400 focus:outline-none rounded-lg p-4 shadow-lg"
+              onChange={(e) => setImage(e.target.files[0])}
             />
           </div>
 
