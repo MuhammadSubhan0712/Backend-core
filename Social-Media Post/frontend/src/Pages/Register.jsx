@@ -1,34 +1,50 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "sonner";
 import axios from "axios";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
-  const [formData , setFormData] = useState({email:"", password:""});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleChange = (event) => { 
-      setFormData({...formData, [event.target.name]: event.target.value});
-  }
-  const handleSubmit = async (event) => {  
-        event.preventDefault();
-        try {
-          const response = await axios.post("/api/register", formData);
-          console.log(response);
-          
-        } catch (error) {
-          console.error("Erorr registering user ==>", error);
-        }
-  } 
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await axios.post("/api/register", formData);
+      console.log(response);
+      toast.success("Account created!");
+      navigate("/login");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#333333]">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-cyberpunk-dark font-orbitron">
       {/* Heading */}
-      <h1 className="text-4xl font-bold mb-3 text-center text-yellow-400 drop-shadow-md">
-      Register
+      <div className="text-center mb-8">
+ <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink">
+        JOIN THE NETWORK
       </h1>
-      <span className="text-xl font-mono text-orange-600">✨ to get social 🤳</span>
+      <p className="text-cyberpunk-cyan">Create your digital identity</p>
+      </div>
+     
+    
       {/* Form Container */}
       <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -76,8 +92,7 @@ const Register = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="underline text-yellow-400 hover:text-green-400 transition-colors"
-          >
+            className="underline text-yellow-400 hover:text-green-400 transition-colors">
             Login
           </Link>
         </p>
