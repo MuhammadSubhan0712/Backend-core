@@ -1,17 +1,71 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import "../index.css";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import axios from "axios";
 
 const Posting = () => {
 
   const [posts, setPosts] = useState([]);
-  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [newPost, setNewPost] = useState({
+    title: "",
+    image: null,
+  });
 
   useEffect(() => {
-    axios.get("api/")
-  },[])
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get("/api/posts",{
+          headers: {Authorization: `Bearer ${localStorage.getItem("token")}`}
+        });
+        setPosts(response.data);
+      } catch (error) {
+        toast.error("Failed to load posts", error);
+      }
+    }
+    fetchPost();
+  },[]);
+  
+  const handlePostSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const formData= new FormData();
+      formData.append("title", newPost.title)
+      formData.append("image", newPost.image);
+
+      const response = await axios.post("/api/posts", formData,{
+        headers: {
+          "Content-Type": "multiple/form-data",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      setPosts([response.data, ...posts]);
+      setNewPost({ title: "", image: null });
+      toast.success("Posted successfully");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Post failed");
+    }
+    finally{
+      setLoading(false);
+    }
+  }
+
+  // For Like Button:
+  const handleLike = async (postId) => {
+    try {
+      await axios.post(`api/likes/${postId}` , {} , {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+      });
+      setPosts(posts.map(post => 
+        post._id === postId ? { ...post, likes: [...post.likes, { userId: 'current-user' }] } : post
+      ));
+    
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#333333] text-white overflow-hidden">
