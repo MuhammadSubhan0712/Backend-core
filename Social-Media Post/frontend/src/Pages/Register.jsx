@@ -95,7 +95,7 @@ const Register = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="underline text-yellow-400 hover:text-green-400 transition-colors">
+            className="text-cyberpunk-cyan hover:underline">
             Login
           </Link>
         </p>
