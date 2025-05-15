@@ -1,25 +1,35 @@
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "sonner";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [formData , setFormData] = useState({email:"", password:""});
-  
-    const handleChange = (event) => { 
-        setFormData({...formData, [event.target.name]: event.target.value});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post("/api/login", formData);
+      console.log(response);
+      toast.success("Login successful!");
+      navigate("/post");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "!Login failed!");
+    } finally {
+      setLoading(false);
     }
-    const handleSubmit = async (event) => {  
-          event.preventDefault();
-          try {
-            const response = await axios.post("/api/register", formData);
-            console.log(response);
-            
-          } catch (error) {
-            console.error("Erorr registering user ==>", error);
-          }
-    } 
+  };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#000000] via-[#1a1a1a] to-[#333333]">
       {/* Heading */}
@@ -30,7 +40,6 @@ const Login = () => {
       {/* Form Container */}
       <div className="bg-[#121212] p-6 rounded-lg shadow-xl w-full max-w-sm">
         <form onSubmit={handleSubmit} className="space-y-6">
-    
           {/* Email Input */}
           <div>
             <Input
@@ -38,7 +47,7 @@ const Login = () => {
               value={formData.email}
               placeholder="Email"
               className="w-full bg-zinc-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none rounded-lg p-3 transition-shadow"
-              onChange={handleChange}   
+              onChange={handleChange}
               required
             />
           </div>
@@ -57,7 +66,7 @@ const Login = () => {
 
           {/* Sign-Up Button */}
           <Button className="w-full bg-gradient-to-r from-yellow-400 via-green-400 to-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:scale-105 hover:shadow-lg transition-transform">
-          Login
+            Login
           </Button>
         </form>
 
