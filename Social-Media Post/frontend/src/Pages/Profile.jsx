@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { toast } from "sonner";
+
 const Profile = () => {
   const { user, logout } = useAuth();
   const [formData, setFormData] = useState({
