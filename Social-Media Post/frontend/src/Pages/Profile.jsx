@@ -82,14 +82,13 @@ const Profile = () => {
                 className='bg-[#222] border-cyberpunk-cyan/30'
                 />
 
-                  <Input 
-                type="text"
-                placeholder="Password"
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})} 
-                className='bg-[#222] border-cyberpunk-cyan/30'
-                />
-                
+                <textarea
+              placeholder="Bio"
+              value={formData.bio}
+              onChange={(e) => setFormData({...formData, bio: e.target.value})}
+              className="w-full bg-[#222] text-white p-3 rounded border border-cyberpunk-cyan/30 min-h-[100px]"
+            />
+
             </form>
            </div>
           </div>
