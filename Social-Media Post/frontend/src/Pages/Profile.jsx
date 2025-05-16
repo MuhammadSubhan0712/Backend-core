@@ -99,6 +99,26 @@ const Profile = () => {
                 </Button>
               </form>
             </div>
+
+            {/* User Posts: */}
+            <h2 className="text-2xl text-cyberpunk-pink mb-4">YOUR POSTS</h2>
+            <div className="space-y-4">
+              {posts.map((post) => (
+                <div
+                  key={post._id}
+                  className="bg-cyberpunk-card p-4 rounded-lg border border-cyberpunk-pink/20">
+                  <p>{post.title}</p>
+                  {post.image && (
+                    <img
+                      src={post.image}
+                      alt="Post"
+                      className="mt-2 rounded-lg max-h-60 w-auto"
+                    />
+                  )}
+                </div>
+              ))}
+              ;
+            </div>
           </div>
         </div>
       </div>
