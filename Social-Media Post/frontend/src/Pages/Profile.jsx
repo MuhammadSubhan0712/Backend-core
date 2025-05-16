@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useAuth } from "../context/AuthContext";
 import axios from 'axios';
 import { toast } from 'sonner';
@@ -64,7 +65,32 @@ const Profile = () => {
             <h2 className='text-2xl text-cyberpunk-cyan mb-4'>
                 EDIT PROFILE
             </h2>
-            
+            <form onSubmit={handleUpdate} className='space-y-4'>
+                <Input 
+                type="text"
+                placeholder="Username"
+                value={formData.username}
+                onChange={(e) => setFormData({...formData, username: e.target.value})} 
+                className='bg-[#222] border-cyberpunk-cyan/30'
+                />
+                
+                <Input 
+                type="text"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})} 
+                className='bg-[#222] border-cyberpunk-cyan/30'
+                />
+
+                  <Input 
+                type="text"
+                placeholder="Password"
+                value={formData.password}
+                onChange={(e) => setFormData({...formData, password: e.target.value})} 
+                className='bg-[#222] border-cyberpunk-cyan/30'
+                />
+                
+            </form>
            </div>
           </div>
         </div>
