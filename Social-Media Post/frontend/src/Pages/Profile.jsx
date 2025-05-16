@@ -31,10 +31,20 @@ const Profile = () => {
         }
     };
     const handleUpdate = async (event) => {
-       
-    }
+       event.preventDefault();
+       try {
+        await axios.put("/api/users", formData, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+        alert("Profile Updated!");
+       } catch (error) {
+        toast.error("Updated failed!", error);
+       }
+    };
   return (
-    <div>Profile</div>
+    <>
+    
+    </>
   )
 }
 
