@@ -59,6 +59,13 @@ const Profile = () => {
                 Logout
             </Button>
            </div>
+
+           <div className='bg-cyberpunk-card p-6 rounded-xl border border-cyberpunk-cyan/20 mb-8'>
+            <h2 className='text-2xl text-cyberpunk-cyan mb-4'>
+                EDIT PROFILE
+            </h2>
+            
+           </div>
           </div>
         </div>
 
