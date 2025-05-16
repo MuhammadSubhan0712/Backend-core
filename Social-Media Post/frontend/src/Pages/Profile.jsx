@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Button } from "@/components/ui/button";
 import { useAuth } from "../context/AuthContext";
 import axios from 'axios';
 import { toast } from 'sonner';
@@ -43,7 +44,25 @@ const Profile = () => {
     };
   return (
     <>
-    
+    <div className='min-h-screen bg-cyberpunk-dark text-white font-oribtron p-4'>
+        <div className='max-w-4xl mx-auto'>
+          <div className='flex items-center justify-between mb-8'>
+           <div className='flex items-center'>
+            <div className='w-20 h-20 rounded-full bg-gradient-to-r from-cyberpunk-cyan to-cyberpunk-pink mr-4'>
+                <h1 className="text-3xl font-bold">
+                    {user?.username}
+                </h1>
+            </div>
+            <Button
+            onClick={logout}
+            className='bg-cyberpunk-pink text-black hover:bg-cyberpunk-pink/80'>
+                Logout
+            </Button>
+           </div>
+          </div>
+        </div>
+
+    </div>
     </>
   )
 }
