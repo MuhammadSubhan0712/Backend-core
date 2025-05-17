@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 const Posting = () => {
   const [posts, setPosts] = useState([]);
@@ -74,22 +75,34 @@ const Posting = () => {
   };
 
   const toggleComments = (postId) => {
-    setActiveComments(prev => ({
+    setActiveComments((prev) => ({
       ...prev,
-      [postId]: !prev[postId]
+      [postId]: !prev[postId],
     }));
-  }
+  };
 
   const addComment = async (postId, content) => {
     try {
-      await axios.post(`/api/comments/${postId}`, { content },{
-        header: { Authorization: `Bearer ${token}` }
-      });
-    fetchPost();
+      await axios.post(
+        `/api/comments/${postId}`,
+        { content },
+        {
+          header: { Authorization: `Bearer ${token}` },
+        }
+      );
+      fetchPost();
     } catch (error) {
       toast.error("Failed to add comment", error);
     }
-  }
+  };
+
+  useEffect(() => {
+    const socket = io("http://localhost:5000"); // Your backend URL
+    socket.on("newPost", (post) => {
+      setPosts((prev) => [post, ...prev]);
+    });
+    return () => socket.disconnect();
+  }, []);
 
   return (
     <div className="min-h-screen bg-cyberpunk-dark text-white font-orbitron p-4">
@@ -166,13 +179,40 @@ const Posting = () => {
                   👍 {post.likes?.length || 0}
                 </Button>
 
+                {activeComments[post._id] && (
+                  <div className="mt-4">
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        const content = e.target.comment.value;
+                        if (content) addComment(post._id, content);
+                        e.target.comment.value = "";
+                      }}>
+                      <input
+                        name="comment"
+                        placeholder="Add a comment..."
+                        className="w-full bg-[#333] text-white p-2 rounded border border-cyberpunk-pink/20"
+                      />
+                    </form>
+                    <div className="mt-2 space-y-2">
+                      {post.comments?.map((comment) => (
+                        <div key={comment._id} className="flex items-start">
+                          <span className="font-bold text-cyberpunk-cyan mr-2">
+                            {comment.userId.username}:
+                          </span>
+                          <span>{comment.content}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <Button className="bg-transparent text-cyberpunk-pink border border-cyberpunk-pink hover:bg-cyberpunk-pink/10">
                   💬 Comment
                 </Button>
               </div>
             </div>
           ))}
-        </div> 
+        </div>
       </div>
     </div>
   );
