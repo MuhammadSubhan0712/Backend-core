@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Posting = () => {
   const [posts, setPosts] = useState([]);
+  const [activeComments, setActiveComments] = useState({});
   const [loading, setLoading] = useState(false);
   const [newPost, setNewPost] = useState({
     title: "",
@@ -72,6 +73,24 @@ const Posting = () => {
     }
   };
 
+  const toggleComments = (postId) => {
+    setActiveComments(prev => ({
+      ...prev,
+      [postId]: !prev[postId]
+    }));
+  }
+
+  const addComment = async (postId, content) => {
+    try {
+      await axios.post(`/api/comments/${postId}`, { content },{
+        header: { Authorization: `Bearer ${token}` }
+      });
+    fetchPost();
+    } catch (error) {
+      toast.error("Failed to add comment", error);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-cyberpunk-dark text-white font-orbitron p-4">
       <div className="max-w-4xl mx-auto">
@@ -114,7 +133,7 @@ const Posting = () => {
           </form>
         </div>
 
-        {/* Post Feed
+        {/* {/* Post Feed */}
         <div className="space-y-6">
           {posts.map((post) => (
             <div
@@ -153,7 +172,7 @@ const Posting = () => {
               </div>
             </div>
           ))}
-        </div> */}
+        </div> 
       </div>
     </div>
   );
